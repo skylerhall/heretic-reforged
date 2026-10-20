@@ -8,6 +8,10 @@ var failures: Array[String] = []
 
 
 func _ready() -> void:
+	# If a script fails to compile the game never starts; don't hang forever.
+	get_tree().create_timer(180.0).timeout.connect(func():
+		print("RESULT: FAIL (timed out)")
+		get_tree().quit(1))
 	main = load("res://scenes/main.tscn").instantiate()
 	add_child(main)
 	await get_tree().process_frame
@@ -66,7 +70,6 @@ func _ready() -> void:
 		p.weapon_node._fire()
 		for i in 5:
 			await get_tree().physics_frame
-	print("projectiles alive: %d" % get_tree().get_nodes_in_group("x").size())
 
 	# walk up the steps to the east platform (needs step climbing)
 	p.global_position = GeometryBuilder.to_world(Vector2(1600, 384), 0.0) + Vector3(0, 0.05, 0)

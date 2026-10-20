@@ -35,6 +35,8 @@ var _knock := Vector3.ZERO
 var _stuck_t := 0.0
 var _heard := false
 var _flinch := 0.0
+var _custom := false      # a replacement model with its own animations
+var _anim_state := -1
 
 
 func setup(k: String, is_ambush: bool) -> void:
@@ -53,7 +55,15 @@ func setup(k: String, is_ambush: bool) -> void:
 	cs.shape = shape
 	cs.position.y = height * 0.5
 	add_child(cs)
-	model = Models.monster(def.model, def)
+	var custom := AssetOverrides.model("monsters", [kind, def.model], height)
+	if custom != null:
+		model = custom
+		_custom = true
+		if def.get("ghost", false):
+			for g in custom.find_children("*", "GeometryInstance3D", true, false):
+				g.transparency = 0.5
+	else:
+		model = Models.monster(def.model, def)
 	add_child(model)
 	for n in ["body", "head", "arm_l", "arm_r", "leg_l", "leg_r", "wing_l", "wing_r"]:
 		var f := model.find_child(n, true, false)
@@ -290,6 +300,8 @@ func _die() -> void:
 	Sfx.play("monster_death", global_position)
 	Effects.blood(global_position + Vector3(0, height * 0.5, 0))
 	velocity = Vector3(velocity.x * 0.3, 0.0, velocity.z * 0.3)
+	if _custom:
+		AssetOverrides.play(model, "death", 1.0, true)
 	var drop: String = def.get("drop", "")
 	if drop != "" and randf() < 0.6:
 		var item := Pickup.new()
@@ -302,9 +314,10 @@ func _die() -> void:
 
 func _death_update(dt: float) -> void:
 	_state_t += dt
-	var t := clampf(_state_t * 2.5, 0.0, 1.0)
-	model.rotation.x = lerpf(0.0, PI * 0.5, t * t)
-	model.position.y = -0.1 * t
+	if not (_custom and AssetOverrides.has_clip(model, "death")):
+		var t := clampf(_state_t * 2.5, 0.0, 1.0)
+		model.rotation.x = lerpf(0.0, PI * 0.5, t * t)
+		model.position.y = -0.1 * t
 	if not is_on_floor():
 		velocity.y -= GRAVITY * dt
 	else:
@@ -315,7 +328,34 @@ func _death_update(dt: float) -> void:
 		set_physics_process(false)
 
 
-func _animate(_dt: float) -> void:
+func _animate(dt: float) -> void:
+	if _custom:
+		_animate_custom()
+		return
+	_animate_parts(dt)
+
+
+## Replacement models: play the clip that matches the AI state.
+func _animate_custom() -> void:
+	var entered := state != _anim_state
+	_anim_state = state
+	var spd := Vector2(velocity.x, velocity.z).length()
+	var ok := false
+	match state:
+		State.ATTACK:
+			ok = AssetOverrides.play(model, "attack", 1.0, entered)
+		State.PAIN:
+			ok = AssetOverrides.play(model, "pain", 1.0, entered)
+		_:
+			if spd > 0.3:
+				ok = AssetOverrides.play(model, "walk", clampf(spd / float(def.speed), 0.6, 1.6))
+	if not ok:
+		AssetOverrides.play(model, "idle")
+	if def.get("fly", false):
+		model.position.y = sin(_anim * 3.0 + _phase) * 0.1
+
+
+func _animate_parts(_dt: float) -> void:
 	var spd := Vector2(velocity.x, velocity.z).length()
 	var walk := sin(_anim * (5.0 + spd * 1.2) + _phase)
 	var amt := clampf(spd / 3.0, 0.0, 1.0)

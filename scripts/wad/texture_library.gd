@@ -5,6 +5,8 @@ extends RefCounted
 
 const WORLD_SHADER := preload("res://shaders/world.gdshader")
 const MASKED_SHADER := preload("res://shaders/world_masked.gdshader")
+const HD_SHADER := preload("res://shaders/world_hd.gdshader")
+const HD_MASKED_SHADER := preload("res://shaders/world_hd_masked.gdshader")
 
 
 class TexInfo:
@@ -16,6 +18,9 @@ class TexInfo:
 	var scroll := Vector2.ZERO
 	var wobble := 0.0
 	var masked := false
+	var hd := false      # replaced by HD art (see AssetOverrides)
+	var normal: Texture2D
+	var roughness: Texture2D
 
 
 var wad: WadFile
@@ -51,18 +56,20 @@ func wall(name: String) -> TexInfo:
 	if name == "" or name == "-":
 		return null
 	if not _walls.has(name):
-		_walls[name] = _make_procedural(name, false) if _procedural else _compose_wall(name)
+		_walls[name] = _with_override(name, _make_procedural(name, false) if _procedural else _compose_wall(name))
 	var t: TexInfo = _walls[name]
 	return t if t != null else _get_fallback()
 
 
 func has_wall(name: String) -> bool:
+	if not AssetOverrides.texture(name).is_empty():
+		return true
 	return name in ProceduralTextures.WALLS if _procedural else _tex_defs.has(name)
 
 
 func flat(name: String) -> TexInfo:
 	if not _flats.has(name):
-		_flats[name] = _make_procedural(name, true) if _procedural else _read_flat(name)
+		_flats[name] = _with_override(name, _make_procedural(name, true) if _procedural else _read_flat(name))
 	var t: TexInfo = _flats[name]
 	return t if t != null else _get_fallback()
 
@@ -73,7 +80,16 @@ func material(t: TexInfo, masked := false) -> Material:
 	if _materials.has(key):
 		return _materials[key]
 	var m := ShaderMaterial.new()
-	m.shader = MASKED_SHADER if masked else WORLD_SHADER
+	if t.hd:
+		m.shader = HD_MASKED_SHADER if masked else HD_SHADER
+		m.set_shader_parameter("has_normal", t.normal != null)
+		m.set_shader_parameter("has_roughness", t.roughness != null)
+		if t.normal != null:
+			m.set_shader_parameter("normal_tex", t.normal)
+		if t.roughness != null:
+			m.set_shader_parameter("roughness_tex", t.roughness)
+	else:
+		m.shader = MASKED_SHADER if masked else WORLD_SHADER
 	m.set_shader_parameter("albedo_tex", t.texture)
 	m.set_shader_parameter("glow", t.glow)
 	m.set_shader_parameter("scroll", t.scroll)
@@ -82,7 +98,32 @@ func material(t: TexInfo, masked := false) -> Material:
 	return m
 
 
+## Replacement art keeps the original's size in map units, so it lines up
+## exactly where the original texture did.
+func _with_override(name: String, base: TexInfo) -> TexInfo:
+	var ov := AssetOverrides.texture(name)
+	if ov.is_empty():
+		return base
+	var t := base
+	if t == null:
+		t = TexInfo.new()
+		t.name = name
+		t.width = ov.albedo.get_width()
+		t.height = ov.albedo.get_height()
+	t.width = ov.get("width", t.width)
+	t.height = ov.get("height", t.height)
+	t.texture = ov.albedo
+	t.normal = ov.get("normal")
+	t.roughness = ov.get("roughness")
+	t.hd = true
+	return t
+
+
 func sky_texture(name: String) -> Texture2D:
+	# A replacement sky is used as-is: a 2:1 equirectangular panorama.
+	var ov := AssetOverrides.texture(name)
+	if not ov.is_empty():
+		return ov.albedo
 	if _procedural:
 		return null
 	var t := _compose_wall(name)
@@ -206,6 +247,36 @@ func _draw_patch(buf: PackedByteArray, bw: int, bh: int, lump: int, ox: int, oy:
 					buf[o + 2] = palette[ci + 2]
 					buf[o + 3] = 255
 			p += length + 4
+
+
+func wall_names() -> Array:
+	return _tex_defs.keys()
+
+
+func flat_names() -> Array:
+	return _flat_lumps.keys()
+
+
+## Decodes a Doom-format picture lump (sprite, patch) with transparency,
+## or returns null if the lump isn't a valid picture.
+func picture(lump: int) -> Image:
+	var d := wad.data
+	var base := wad.offsets[lump]
+	var size := wad.sizes[lump]
+	if size < 8:
+		return null
+	var w := d.decode_s16(base)
+	var h := d.decode_s16(base + 2)
+	if w <= 0 or h <= 0 or w > 2048 or h > 2048 or 8 + w * 4 > size:
+		return null
+	for col in w:
+		var ofs := d.decode_s32(base + 8 + col * 4)
+		if ofs < 8 or ofs >= size:
+			return null
+	var buf := PackedByteArray()
+	buf.resize(w * h * 4)
+	_draw_patch(buf, w, h, lump, 0, 0)
+	return Image.create_from_data(w, h, false, Image.FORMAT_RGBA8, buf)
 
 
 func _read_flat(name: String) -> TexInfo:

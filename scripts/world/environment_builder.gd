@@ -8,7 +8,7 @@ static func build(world: Node3D, map: MapData, tex: TextureLibrary) -> void:
 	var env := Environment.new()
 	env.background_mode = Environment.BG_SKY
 	var sky := Sky.new()
-	var sky_tex: Texture2D = tex.sky_texture(map.sky) if map.sky != "" else null
+	var sky_tex: Texture2D = tex.sky_texture(map.sky)
 	if sky_tex != null:
 		var pano := PanoramaSkyMaterial.new()
 		pano.panorama = sky_tex

@@ -41,6 +41,8 @@ func _show(name: String) -> void:
 		_models[name] = m
 	_model = _models[name]
 	_model.visible = true
+	if _model.has_meta("custom"):
+		AssetOverrides.play(_model.get_meta("custom"), "idle")
 
 
 func on_new_weapon(name: String) -> void:
@@ -147,6 +149,8 @@ func _fire() -> void:
 		player.ammo[d.ammo] = maxf(player.ammo[d.ammo] - float(d.get("use", 1)), 0.0)
 	cooldown = d.rate
 	kick = 1.0
+	if _model.has_meta("custom"):
+		AssetOverrides.play(_model.get_meta("custom"), "fire", 1.0, true)
 	Sfx.play(d.sound, null, -3.0)
 	var color: Color = d.get("color", Color(1, 0.8, 0.5))
 	if float(d.get("flash", 0.0)) > 0.0:

@@ -121,7 +121,7 @@ func build() -> MapData:
 	var m := MapData.new()
 	m.name = "BUILTIN"
 	m.title = "The Sunken Keep"
-	m.sky = ""
+	m.sky = "SKYKEEP"   # procedural unless assets/textures/SKYKEEP.png exists
 	for s in sectors:
 		m.sectors.append(s.duplicate())
 	var vindex := {}

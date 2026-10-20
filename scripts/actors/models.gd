@@ -277,8 +277,26 @@ static func lich() -> Node3D:
 
 # --- Weapons (first person, pointing down -Z) --------------------------------
 
+## Typical sizes (meters) used to fit replacement models.
+const WEAPON_LENGTH := {"staff": 0.9, "gauntlets": 0.4, "wand": 0.48, "crossbow": 0.6, "claw": 0.45,
+	"hellstaff": 0.75, "phoenix": 0.62, "mace": 0.56}
+const DECOR_HEIGHT := {"wall_torch": 0.7, "serpent_torch": 1.9, "brazier": 1.3, "chandelier": 1.2,
+	"volcano": 1.5, "pillar_small": 2.6, "pillar_brown": 2.6, "stalagmite": 1.2, "stalagmite_big": 2.4,
+	"key_statue_blue": 1.6, "key_statue_green": 1.6, "key_statue_yellow": 1.6}
+const FIRE_DECOR := ["wall_torch", "serpent_torch", "brazier", "volcano"]
+
+
 static func weapon(name: String) -> Node3D:
 	var root := Node3D.new()
+	var custom := AssetOverrides.model("weapons", [name], WEAPON_LENGTH.get(name, 0.55), "length")
+	if custom != null:
+		root.add_child(custom)
+		var marker := Marker3D.new()
+		marker.name = "muzzle"
+		marker.position = Vector3(0, 0, -(custom.get_meta("size") as Vector3).z)
+		root.add_child(marker)
+		root.set_meta("custom", custom)
+		return root
 	var wood := mat(Color(0.35, 0.22, 0.12), 0.8)
 	var gold := mat(Color(0.85, 0.65, 0.25), 0.3, 1.0)
 	var iron := mat(Color(0.35, 0.34, 0.36), 0.4, 0.9)
@@ -346,6 +364,11 @@ static func weapon(name: String) -> Node3D:
 
 static func pickup(kind: String) -> Node3D:
 	var root := Node3D.new()
+	var item_size := 0.6 if kind.begins_with("weapon") else 0.45
+	var custom := AssetOverrides.model("items", [kind], item_size)
+	if custom != null:
+		root.add_child(custom)
+		return root
 	var item: Dictionary = GameData.ITEMS.get(kind, {})
 	if item.has("weapon"):
 		var w := weapon(item.weapon)
@@ -417,6 +440,15 @@ static func pickup(kind: String) -> Node3D:
 
 static func decoration(kind: String) -> Node3D:
 	var root := Node3D.new()
+	var h: float = DECOR_HEIGHT.get(kind, 1.5)
+	var custom := AssetOverrides.model("decor", [kind], h)
+	if custom != null:
+		root.add_child(custom)
+		if kind == "chandelier":
+			custom.position.y = -h   # hangs from the ceiling
+		elif kind in FIRE_DECOR:
+			Effects.fire(root, Vector3(0, h, 0), 1.0)
+		return root
 	var iron := mat(Color(0.25, 0.24, 0.24), 0.5, 0.8)
 	var stone := mat(Color(0.42, 0.4, 0.36), 0.9)
 	match kind:
