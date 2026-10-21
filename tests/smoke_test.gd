@@ -72,8 +72,10 @@ func _ready() -> void:
 			await get_tree().physics_frame
 
 	# walk up the steps to the east platform (needs step climbing). Monsters
-	# are awake by now; keep their hits from knocking the player around.
+	# are awake by now and come to fight; freeze them so they can't stand in
+	# the way or knock the player around while movement is being checked.
 	p.invuln = 1000.0
+	_freeze_monsters(true)
 	p.global_position = GeometryBuilder.to_world(Vector2(1600, 384), 0.0) + Vector3(0, 0.05, 0)
 	p.velocity = Vector3.ZERO
 	for i in 60:
@@ -95,6 +97,7 @@ func _ready() -> void:
 	_check(w.map.sectors[lift_s].floor < 100.0, "lift lowered")
 
 	# monsters wake up and fight
+	_freeze_monsters(false)
 	w.noise_alert(p.global_position)
 	for i in 240:
 		await get_tree().physics_frame
@@ -115,6 +118,12 @@ func _ready() -> void:
 
 	print("RESULT: %s" % ("PASS" if failures.is_empty() else "FAIL " + str(failures)))
 	get_tree().quit(0 if failures.is_empty() else 1)
+
+
+func _freeze_monsters(frozen: bool) -> void:
+	for m in get_tree().get_nodes_in_group("monsters"):
+		m.set_physics_process(not frozen)
+		m.collision_layer = 0 if frozen else Layers.MONSTER
 
 
 func _check(ok: bool, what: String) -> void:
