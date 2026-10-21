@@ -55,7 +55,7 @@ func setup(k: String, is_ambush: bool) -> void:
 	cs.shape = shape
 	cs.position.y = height * 0.5
 	add_child(cs)
-	var custom := AssetOverrides.model("monsters", [kind, def.model], height)
+	var custom := AssetOverrides.model("monsters", [kind, def.get("asset", kind)], height)
 	if custom != null:
 		model = custom
 		_custom = true

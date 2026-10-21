@@ -108,31 +108,35 @@ static func torus(inner: float, outer: float) -> TorusMesh:
 static func monster(model: String, d: Dictionary) -> Node3D:
 	var ghost: bool = d.get("ghost", false)
 	var a := 0.45 if ghost else 1.0
+	var eye: Color = d.get("eye", Color(1, 0.3, 0.1))
 	match model:
-		"gargoyle":
-			return gargoyle(d.color, d.get("eye", Color(1.0, 0.9, 0.2)), a)
-		"golem":
-			return humanoid({"h": d.height, "bulk": 1.35, "color": d.color, "skin": d.color.darkened(0.25),
-				"eye": d.get("eye", Color(1, 0.3, 0.1)), "head": "bandage", "long_arms": true, "alpha": a})
-		"warrior":
-			return humanoid({"h": d.height, "bulk": 1.2, "color": d.color, "skin": Color(0.25, 0.24, 0.26),
-				"eye": Color(1.0, 0.15, 0.1), "head": "helmet", "metal": 0.8, "weapon": "axe", "alpha": a})
-		"sabreclaw":
-			return humanoid({"h": d.height, "bulk": 1.1, "color": d.color, "skin": d.color.darkened(0.3),
-				"eye": Color(1.0, 0.9, 0.2), "head": "horns", "weapon": "blades", "hunch": 25.0})
+		"winged":
+			return gargoyle(d.color, eye, a)
+		"cultist":
+			return humanoid({"h": d.height, "bulk": 1.0, "color": d.color, "skin": Color(0.55, 0.42, 0.34),
+				"eye": eye, "head": "hood", "weapon": "flail", "robe": true, "alpha": a})
+		"stone_brute":
+			return humanoid({"h": d.height, "bulk": 1.7, "color": d.color, "skin": d.color.darkened(0.15),
+				"eye": eye, "head": "box", "long_arms": true, "cracks": eye, "alpha": a})
+		"knight":
+			return humanoid({"h": d.height, "bulk": 1.25, "color": d.color, "skin": Color(0.22, 0.21, 0.22),
+				"eye": eye, "head": "horned_helm", "metal": 0.8, "weapon": "axe", "shield": true, "alpha": a})
+		"wraith":
+			return robed(d.color, eye, d.height, 0.7)
+		"beast":
+			return humanoid({"h": d.height, "bulk": 1.2, "color": d.color, "skin": d.color.darkened(0.2),
+				"eye": eye, "head": "snout", "weapon": "blades", "hunch": 30.0})
 		"dragon":
 			return humanoid({"h": d.height, "bulk": 1.3, "color": d.color, "skin": d.color.darkened(0.3),
 				"eye": Color(1.0, 0.8, 0.1), "head": "snout"})
-		"maulotaur":
-			return humanoid({"h": d.height, "bulk": 1.6, "color": d.color, "skin": d.color.darkened(0.2),
-				"eye": Color(1.0, 0.3, 0.05), "head": "bull", "weapon": "hammer", "long_arms": true})
-		"disciple", "dsparil":
-			return robed(d.color, d.get("eye", Color(0.9, 0.4, 1.0)), d.height)
-		"ophidian":
+		"serpent":
 			return ophidian(d.color)
-		"lich":
-			return lich()
-	return humanoid({"h": d.height, "color": d.color, "eye": Color(1, 0.2, 0.1)})
+		"sorcerer":
+			return robed(d.color, eye, d.height, 1.0, d.get("crown", false))
+		"minotaur":
+			return humanoid({"h": d.height, "bulk": 1.6, "color": d.color, "skin": d.color.darkened(0.2),
+				"eye": eye, "head": "bull", "weapon": "great_axe", "long_arms": true})
+	return humanoid({"h": d.height, "color": d.color, "eye": eye})
 
 
 static func humanoid(p: Dictionary) -> Node3D:
@@ -156,6 +160,18 @@ static func humanoid(p: Dictionary) -> Node3D:
 			part(head, box(0.26 * u, 0.04 * u, 0.02), eye_m, Vector3(0, 0.06 * u, -0.19 * u))
 			for s in [-1, 1]:
 				part(body, sphere(0.16 * u * bulk), body_m, Vector3(s * 0.36 * u * bulk, 0.66 * u, 0))
+		"hood":
+			part(head, sphere(0.21 * u), body_m, Vector3(0, 0.07 * u, 0.03 * u), Vector3.ZERO, Vector3(1, 1.15, 1.1))
+			part(head, cyl(0.0, 0.12 * u, 0.22 * u), body_m, Vector3(0, 0.3 * u, 0.08 * u), Vector3(-25, 0, 0))
+			part(head, sphere(0.15 * u), mat(Color(0.03, 0.02, 0.02), 1.0), Vector3(0, 0.03 * u, -0.08 * u))
+			for s in [-1, 1]:
+				part(head, sphere(0.025 * u), eye_m, Vector3(s * 0.05 * u, 0.06 * u, -0.19 * u))
+		"horned_helm":
+			part(head, cyl(0.15 * u, 0.19 * u, 0.32 * u), body_m, Vector3(0, 0.05 * u, 0))
+			part(head, box(0.26 * u, 0.04 * u, 0.02), eye_m, Vector3(0, 0.06 * u, -0.19 * u))
+			for s in [-1, 1]:
+				part(head, cyl(0.0, 0.045 * u, 0.3 * u), mat(Color(0.8, 0.75, 0.6), 0.5), Vector3(s * 0.2 * u, 0.22 * u, 0), Vector3(0, 0, -s * 55))
+				part(body, sphere(0.17 * u * bulk), body_m, Vector3(s * 0.36 * u * bulk, 0.66 * u, 0))
 		"bandage":
 			part(head, box(0.3 * u, 0.36 * u, 0.3 * u), skin_m, Vector3(0, 0.05 * u, 0), Vector3(0, 0, 4))
 			for s in [-1, 1]:
@@ -178,6 +194,13 @@ static func humanoid(p: Dictionary) -> Node3D:
 			part(head, sphere(0.18 * u), skin_m, Vector3(0, 0.05 * u, 0))
 			for s in [-1, 1]:
 				part(head, sphere(0.035 * u), eye_m, Vector3(s * 0.07 * u, 0.09 * u, -0.16 * u))
+	if p.has("cracks"):
+		var lava := glow(p.cracks, 4.0)
+		for k in 7:
+			part(body, box(0.03 * u, 0.25 * u, 0.02 * u), lava,
+				Vector3((k - 3) * 0.08 * u * bulk, 0.3 * u + (k % 3) * 0.15 * u, -0.27 * u * bulk * 0.7), Vector3(0, 0, (k - 3) * 17))
+	if p.get("robe", false):
+		part(root, cyl(0.24 * u * bulk, 0.42 * u * bulk, 1.0 * u), body_m, Vector3(0, 0.5 * u, 0))
 	var arm_len := (1.0 if p.get("long_arms", false) else 0.78) * u
 	for s in [-1, 1]:
 		var arm := pivot(body, "arm_l" if s < 0 else "arm_r", Vector3(s * 0.38 * u * bulk, 0.68 * u, 0))
@@ -187,9 +210,22 @@ static func humanoid(p: Dictionary) -> Node3D:
 				"axe":
 					part(arm, cyl(0.025 * u, 0.025 * u, 0.9 * u), mat(Color(0.3, 0.2, 0.1)), Vector3(0, -arm_len * 0.9, -0.2 * u), Vector3(90, 0, 0))
 					part(arm, box(0.03 * u, 0.3 * u, 0.22 * u), glow(Color(0.35, 1.0, 0.3), 2.5), Vector3(0, -arm_len * 0.8, -0.6 * u))
+				"flail":
+					part(arm, cyl(0.02 * u, 0.02 * u, 0.45 * u), mat(Color(0.3, 0.2, 0.1)), Vector3(0, -arm_len * 0.95, -0.1 * u), Vector3(70, 0, 0))
+					part(arm, cyl(0.01 * u, 0.01 * u, 0.3 * u), mat(Color(0.4, 0.4, 0.42), 0.4, 0.9), Vector3(0, -arm_len * 1.05, -0.38 * u))
+					var ball := part(arm, sphere(0.09 * u), mat(Color(0.3, 0.3, 0.32), 0.4, 0.9), Vector3(0, -arm_len * 1.25, -0.45 * u))
+					for k in 6:
+						var dirv := Vector3.UP.rotated(Vector3.RIGHT, k * 1.05).rotated(Vector3.UP, k * 0.9)
+						part(ball, cyl(0.0, 0.025 * u, 0.09 * u), mat(Color(0.5, 0.5, 0.52), 0.4, 0.9), dirv * 0.09 * u, Vector3(rad_to_deg(dirv.z), 0, -rad_to_deg(dirv.x)))
+				"great_axe":
+					part(arm, cyl(0.035 * u, 0.035 * u, 1.3 * u), mat(Color(0.3, 0.2, 0.1)), Vector3(0, -arm_len * 0.9, -0.35 * u), Vector3(90, 0, 0))
+					part(arm, box(0.05 * u, 0.55 * u, 0.4 * u), mat(Color(0.45, 0.43, 0.42), 0.35, 0.9), Vector3(0, -arm_len * 0.75, -0.95 * u))
 				"hammer":
 					part(arm, cyl(0.04 * u, 0.04 * u, 1.0 * u), mat(Color(0.3, 0.2, 0.1)), Vector3(0, -arm_len * 0.9, -0.3 * u), Vector3(90, 0, 0))
 					part(arm, box(0.3 * u, 0.3 * u, 0.45 * u), mat(Color(0.35, 0.33, 0.33), 0.4, 0.9), Vector3(0, -arm_len * 0.9, -0.85 * u))
+		if s < 0 and p.get("shield", false):
+			part(arm, cyl(0.28 * u, 0.28 * u, 0.05 * u, 16), mat(Color(0.3, 0.28, 0.27), 0.4, 0.85), Vector3(-0.08 * u, -arm_len * 0.6, -0.12 * u), Vector3(0, 0, 90))
+			part(arm, sphere(0.06 * u), mat(Color(0.75, 0.6, 0.25), 0.3, 1.0), Vector3(-0.12 * u, -arm_len * 0.6, -0.12 * u))
 		if p.get("weapon", "") == "blades":
 			part(arm, box(0.03 * u, 0.05 * u, 0.7 * u), mat(Color(0.8, 0.8, 0.85), 0.25, 1.0), Vector3(0, -arm_len * 0.9, -0.3 * u))
 	for s in [-1, 1]:
@@ -222,10 +258,10 @@ static func gargoyle(color: Color, eye: Color, alpha: float) -> Node3D:
 	return root
 
 
-static func robed(color: Color, eye: Color, h: float) -> Node3D:
+static func robed(color: Color, eye: Color, h: float, alpha := 1.0, crown := false) -> Node3D:
 	var root := Node3D.new()
 	var u := h / 2.0
-	var robe := mat(color, 0.9)
+	var robe := mat(color, 0.9, 0.0, Color(0, 0, 0), 0.0, alpha)
 	var trim := mat(Color(0.75, 0.6, 0.2), 0.35, 0.8)
 	var body := pivot(root, "body", Vector3(0, 0.0, 0))
 	part(body, cyl(0.22 * u, 0.45 * u, 1.3 * u), robe, Vector3(0, 0.75 * u, 0))
@@ -233,6 +269,10 @@ static func robed(color: Color, eye: Color, h: float) -> Node3D:
 	var head := pivot(body, "head", Vector3(0, 1.58 * u, 0))
 	part(head, sphere(0.22 * u), robe, Vector3(0, 0, 0.02 * u), Vector3.ZERO, Vector3(1, 1.15, 1))
 	part(head, sphere(0.16 * u), mat(Color(0.02, 0.01, 0.02), 1.0), Vector3(0, -0.02 * u, -0.08 * u))
+	if crown:
+		for i in 5:
+			var ang := deg_to_rad(-60.0 + i * 30.0)
+			part(head, cyl(0.0, 0.04 * u, 0.4 * u), trim, Vector3(sin(ang) * 0.18 * u, 0.32 * u, -cos(ang) * 0.1 * u), Vector3(0, 0, -rad_to_deg(ang) * 0.6))
 	for s in [-1, 1]:
 		part(head, sphere(0.03 * u), glow(eye, 6.0), Vector3(s * 0.06 * u, 0.0, -0.2 * u))
 		var arm := pivot(body, "arm_l" if s < 0 else "arm_r", Vector3(s * 0.3 * u, 1.3 * u, 0))
@@ -278,7 +318,7 @@ static func lich() -> Node3D:
 # --- Weapons (first person, pointing down -Z) --------------------------------
 
 ## Typical sizes (meters) used to fit replacement models.
-const WEAPON_LENGTH := {"staff": 0.9, "gauntlets": 0.4, "wand": 0.48, "crossbow": 0.6, "claw": 0.45,
+const WEAPON_LENGTH := {"staff": 0.9, "gauntlets": 0.4, "wand": 0.6, "crossbow": 0.6, "claw": 0.45,
 	"hellstaff": 0.75, "phoenix": 0.62, "mace": 0.56}
 const DECOR_HEIGHT := {"wall_torch": 0.7, "serpent_torch": 1.9, "brazier": 1.3, "chandelier": 1.2,
 	"volcano": 1.5, "pillar_small": 2.6, "pillar_brown": 2.6, "stalagmite": 1.2, "stalagmite_big": 2.4,

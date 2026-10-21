@@ -71,7 +71,9 @@ func _ready() -> void:
 		for i in 5:
 			await get_tree().physics_frame
 
-	# walk up the steps to the east platform (needs step climbing)
+	# walk up the steps to the east platform (needs step climbing). Monsters
+	# are awake by now; keep their hits from knocking the player around.
+	p.invuln = 1000.0
 	p.global_position = GeometryBuilder.to_world(Vector2(1600, 384), 0.0) + Vector3(0, 0.05, 0)
 	p.velocity = Vector3.ZERO
 	for i in 60:

@@ -5,12 +5,15 @@ class_name ThingSpawner
 
 const S := Layers.S
 
+# Heretic's monster slots filled with the design map's roster, by role:
+# the common melee slot (golem) is the Disciple, the tougher ranged slot
+# (nitrogolem) is the heavy Golem, the flying caster slot is the Wraithverge.
 const MONSTERS := {
-	66: "gargoyle", 5: "fire_gargoyle",
-	68: "golem", 45: "nitrogolem", 69: "golem_ghost", 46: "nitrogolem_ghost",
-	64: "warrior", 65: "warrior_ghost",
-	90: "sabreclaw", 70: "weredragon", 92: "ophidian", 15: "disciple",
-	6: "iron_lich", 9: "maulotaur", 7: "dsparil",
+	66: "gryphon", 5: "fire_gryphon",
+	68: "disciple", 69: "disciple_ghost", 45: "golem", 46: "golem_ghost",
+	64: "hell_knight", 65: "hell_knight_ghost",
+	90: "sabreclaw", 70: "weredragon", 92: "ophidian", 15: "wraithverge",
+	6: "iron_liche", 9: "maulotaur", 7: "dsparil",
 }
 
 const PICKUPS := {

@@ -7,19 +7,19 @@ for the full list of names.
 
 | Folder | Files | Examples |
 |---|---|---|
-| `monsters/` | `.glb` / `.gltf` | `golem.glb`, `gargoyle.glb`, `warrior.glb`, `disciple.glb` |
+| `monsters/` | `.glb` / `.gltf` | `disciple.glb`, `gryphon.glb`, `hell_knight.glb`, `ophidian.glb`, `wraithverge.glb`, `golem.glb`, `sabreclaw.glb`, `maulotaur.glb`, `iron_liche.glb`, `dsparil.glb` |
 | `weapons/` | `.glb` / `.gltf` | `wand.glb`, `crossbow.glb`, `claw.glb`, `hellstaff.glb`, `phoenix.glb`, `mace.glb`, `staff.glb`, `gauntlets.glb` |
 | `items/` | `.glb` / `.gltf` | `vial.glb`, `tome.glb`, `wings.glb`, `key_green.glb`, `shield_silver.glb` |
 | `decor/` | `.glb` / `.gltf` | `brazier.glb`, `serpent_torch.glb`, `wall_torch.glb`, `chandelier.glb` |
 | `textures/` | `.png` / `.jpg` / `.webp` | `BRICK.png` + optional `BRICK_normal.png`, `BRICK_roughness.png`; for your WAD, use the original names (e.g. `GRSTNPB.png`); `SKYKEEP.png` or `SKY1.png` for skies (2:1 panorama) |
 
 **Fallbacks:**
-- Variants fall back to their base model: `fire_gargoyle` uses `gargoyle.glb`,
-  and `nitrogolem` uses `golem.glb` if it has no file of its own.
+- Variants fall back to their base model: `fire_gryphon` uses `gryphon.glb`,
+  and `hell_knight_ghost` uses `hell_knight.glb` if it has no file of its own.
 - Ghost variants are drawn translucent automatically.
 
 **Animation clips** are matched by keyword:
-- *idle*, *walk/run/fly*, *attack/punch/cast/throw*, *hit/pain/react* and
+- *idle*, *walk/run/move/fly*, *attack/punch/cast/throw*, *hit/pain/react* and
   *death/dying* for monsters.
 - *fire* for weapons.
 

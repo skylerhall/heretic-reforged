@@ -3,7 +3,7 @@ class_name GameData
 
 const AMMO_MAX := {"wand": 100, "crossbow": 50, "claw": 200, "hellstaff": 200, "phoenix": 20, "mace": 150}
 const AMMO_COLOR := {
-	"wand": Color(1.0, 0.85, 0.3), "crossbow": Color(0.4, 1.0, 0.55), "claw": Color(0.4, 0.6, 1.0),
+	"wand": Color(0.45, 0.65, 1.0), "crossbow": Color(0.4, 1.0, 0.55), "claw": Color(0.4, 0.6, 1.0),
 	"hellstaff": Color(1.0, 0.25, 0.25), "phoenix": Color(1.0, 0.55, 0.15), "mace": Color(0.75, 0.75, 0.85),
 }
 
@@ -20,7 +20,7 @@ const WEAPONS := {
 		"dmin": 2, "dmax": 16, "sound": "gauntlets", "flash": 1.2, "color": Color(0.4, 1.0, 0.5),
 		"powered": {"dmin": 8, "dmax": 32, "range": 3.2, "drain": true, "color": Color(1.0, 0.3, 0.3)}},
 	"wand": {"name": "ELVEN WAND", "ammo": "wand", "use": 1, "rate": 0.3, "kind": "hitscan", "count": 1,
-		"spread": 0.01, "dmin": 7, "dmax": 14, "sound": "wand", "flash": 2.0, "color": Color(1.0, 0.85, 0.35),
+		"spread": 0.01, "dmin": 7, "dmax": 14, "sound": "wand", "flash": 2.0, "color": Color(0.45, 0.65, 1.0),
 		"powered": {"count": 5, "spread": 0.06, "dmin": 7, "dmax": 21, "rate": 0.35}},
 	"crossbow": {"name": "ETHEREAL CROSSBOW", "ammo": "crossbow", "use": 1, "rate": 0.7, "kind": "projectile",
 		"shots": [["bolt_big", 0.0], ["bolt", -5.0], ["bolt", 5.0]], "sound": "crossbow", "flash": 1.5,
@@ -58,10 +58,13 @@ const PROJECTILES := {
 	"warrior_axe": {"speed": 15.0, "dmin": 8, "dmax": 16, "color": Color(0.4, 1.0, 0.3), "size": 0.2, "light": true, "spin": true},
 	"disciple_bolt": {"speed": 15.0, "dmin": 4, "dmax": 10, "color": Color(0.8, 0.35, 1.0), "size": 0.15, "light": true},
 	"dragon_fire": {"speed": 20.0, "dmin": 8, "dmax": 18, "color": Color(1.0, 0.4, 0.1), "size": 0.2, "light": true},
-	"ophidian_ball": {"speed": 18.0, "dmin": 6, "dmax": 14, "color": Color(1.0, 0.85, 0.3), "size": 0.18, "light": true},
+	"ophidian_ball": {"speed": 18.0, "dmin": 6, "dmax": 14, "color": Color(0.45, 1.0, 0.35), "size": 0.18, "light": true},
+	"lava_rock": {"speed": 15.0, "dmin": 10, "dmax": 22, "color": Color(1.0, 0.45, 0.08), "size": 0.28, "light": true, "gravity": 3.0, "splash": 2.0, "splash_dmg": 15},
+	"wraith_bolt": {"speed": 15.0, "dmin": 5, "dmax": 12, "color": Color(0.35, 1.0, 0.6), "size": 0.16, "light": true},
+	"liche_bolt": {"speed": 18.0, "dmin": 15, "dmax": 30, "color": Color(0.75, 0.35, 1.0), "size": 0.28, "light": true, "splash": 3.0, "splash_dmg": 25},
 	"lich_ice": {"speed": 18.0, "dmin": 20, "dmax": 40, "color": Color(0.5, 0.9, 1.0), "size": 0.3, "light": true, "splash": 3.0, "splash_dmg": 30},
 	"maulotaur_fire": {"speed": 22.0, "dmin": 20, "dmax": 40, "color": Color(1.0, 0.35, 0.05), "size": 0.4, "light": true, "splash": 3.0, "splash_dmg": 40},
-	"dsparil_bolt": {"speed": 20.0, "dmin": 15, "dmax": 30, "color": Color(0.4, 0.7, 1.0), "size": 0.25, "light": true},
+	"dsparil_bolt": {"speed": 20.0, "dmin": 15, "dmax": 30, "color": Color(0.7, 0.4, 1.0), "size": 0.25, "light": true},
 }
 
 # Item effects: ammo, health, armor, weapon, key, artifact, bag.

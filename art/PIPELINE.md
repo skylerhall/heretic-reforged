@@ -1,16 +1,17 @@
 # Free AI art pipeline
 
-How to turn the original Heretic designs into realistic, high-fidelity art for
-Heretic Reforged using free tools, and get it into the game. What to make is
+How to turn the **design map** (HD Character & Monster Design Template) into
+realistic 3D characters for Heretic Reforged using free tools, and get them
+into the game. What to make is
 listed in [`asset-manifest.json`](asset-manifest.json); the visual rules are in
 [`art-direction-brief.md`](art-direction-brief.md).
 
 ```
-your HERETIC.WAD
-   │  1. extract references        (tools/extract_references.gd)
+design map panels (characters)  +  your HERETIC.WAD (level textures, optional)
+   │  1. crop references / extract textures (tools/extract_references.gd)
    ▼
-reference sprites + textures
-   │  2. concept art / HD textures (Draw Things or ComfyUI, image-to-image)
+front view per character, original textures
+   │  2. clean concept art / HD textures (Draw Things or ComfyUI, image-to-image)
    ▼
 concept image per asset
    │  3. image → 3D model          (TRELLIS / TripoSR)
@@ -18,17 +19,19 @@ concept image per asset
 raw .glb
    │  4. rig + animate             (Mixamo) → clean up (art/tools/blender_prepare.py)
    ▼
-game-ready .glb  ──►  assets/monsters/golem.glb  ──►  in game
+game-ready .glb  ──►  assets/monsters/disciple.glb  ──►  in game
 ```
 
-> **Rights.** The original designs belong to id Software (Microsoft). Recreations
-> of them are fine for your own copy of the game. Before publishing a build
-> with them (web page, store), get advice. The game's built-in level and
-> placeholders are original and safe to share. Also check the license of every
-> AI model you use (noted below).
+> **Rights.** The design map's characters are reimagined rather than copied
+> from the 1994 sprites, which keeps you much safer when sharing builds. The
+> names "Heretic", "D'Sparil", "Corvus" and so on are still id Software's
+> (Microsoft's) trademarks, so consider your own title before a public or
+> commercial release. Original WAD textures extracted in step 1 are
+> copyrighted: keep them private. Check the license of every AI model you use
+> (noted below).
 
-Start with **one hero asset: the golem**. Take it all the way into the game and
-judge it there before making the rest (see "Approve the target" in the brief).
+Start with **one hero asset: the Disciple**. Take it all the way into the game
+and judge it there before making the rest (see "Visual target" in the brief).
 
 ---
 
@@ -48,9 +51,15 @@ Hunyuan3D-2 gives great results, but its community license excludes some
 regions (including the EU and UK) and limits large commercial use. Read it
 before relying on it.
 
-## 1. Extract references from your WAD
+## 1. References
 
-From the repository folder:
+**Characters:** crop each character's panel from the design map into three
+images: `front`, `side`, `back` (Preview on a Mac: select → Crop). The front
+view feeds image-to-image; the side and back views are for checking the 3D
+model. Save the full map as `art/design-map.png` in the repository.
+
+**Level textures (optional, only for playing your own WAD in HD):** extract the
+originals. From the repository folder:
 
 ```bash
 # macOS: GODOT=/Applications/Godot.app/Contents/MacOS/Godot
@@ -64,8 +73,7 @@ You get:
 - `textures/` and `flats/`: every wall and floor at original size.
 - `INDEX.md`: which prefix is which monster.
 
-The manifest names the prefix for each asset (the golem is `MUMM`). Keep these
-files private: they are the original copyrighted art.
+Keep these files private: they are the original copyrighted art.
 
 ## 2. Concept art and HD textures
 
@@ -74,15 +82,15 @@ VIEW, ART DIRECTION, ...). Put the shared blocks first, unchanged, every time.
 That keeps the whole family consistent.
 
 **Characters and props (image-to-image):**
-1. Pick the clearest **front view** frame from the reference sprite folder (for
-   the golem, `MUMMA1.png`).
-2. Use it as the init image, at **strength/denoise 0.55–0.7**. Lower keeps more
-   of the original; higher adds more detail.
+1. Use the character's **front view** crop from the design map as the init image.
+2. Set **strength/denoise to 0.45–0.6**. The goal isn't a new design: it's the
+   same design in flat, even light on a gray background, with full limbs
+   visible. Lower keeps more of the map; higher cleans up more.
 3. Prompt with the manifest's SUBJECT + ART DIRECTION. Add the negative prompt
    from `shared_prompt_blocks.exclude`.
 4. Aim for a full body, A-pose, plain gray background and flat light. The 3D
    step needs a clean silhouette with no shadows baked in.
-5. Generate 4–8 options and pick the one that reads most like the original at
+5. Generate 4–8 options and pick the one that best matches the map panel at
    thumbnail size, not the prettiest close up.
 
 **Textures:**
@@ -113,15 +121,16 @@ That keeps the whole family consistent.
 4. Fix obvious holes. Regenerate from a better concept image rather than
    sculpting for hours.
 
-Non-humanoids (gargoyle, Ophidian, Iron Lich) can skip Mixamo. Either:
+Non-humanoids (Gryphon, Sabreclaw, Ophidian, maybe the Wraithverge) can skip
+Mixamo. Either:
 - give them a simple bone chain in Blender, or
 - ship them without animation. The game still bobs and hovers them, and
   plays any clips the file has.
 
 ## 4. Rig, animate and prepare
 
-**Humanoids** (golem, Undead Warrior, Disciple, Weredragon, Sabreclaw,
-Maulotaur, D'Sparil):
+**Humanoids** (Disciple, Hell Knight, Golem, Iron Liche, Maulotaur, D'Sparil,
+Corvus):
 
 1. In Blender, export the model as FBX (File → Export → FBX).
 2. Upload it to Mixamo and place the auto-rigger markers.
@@ -129,23 +138,23 @@ Maulotaur, D'Sparil):
 4. Download each animation as **FBX Binary, Without Skin, 30 fps**. Suggested
    Mixamo searches:
 
-   | Clip | Golem | Undead Warrior | Disciple |
-   |---|---|---|---|
-   | idle | "Zombie Idle" | "Sword And Shield Idle" | "Floating" |
-   | walk | "Zombie Walk" | "Walking" | "Floating" |
-   | attack | "Zombie Punching" | "Throw" | "Magic Spell Casting" |
-   | pain | "Hit Reaction" | "Hit Reaction" | "Hit Reaction" |
-   | death | "Zombie Dying" | "Dying" | "Dying" |
+   | Clip | Disciple | Hell Knight | Golem | Iron Liche / D'Sparil |
+   |---|---|---|---|---|
+   | idle | "Idle" | "Sword And Shield Idle" | "Mutant Idle" | "Standing Idle" |
+   | walk | "Walking" | "Sword And Shield Walk" | "Mutant Walking" | "Walking" |
+   | attack | "Standing Melee Attack Horizontal" | "Sword And Shield Slash" | "Mutant Punch" | "Standing 2H Magic Attack" |
+   | pain | "Hit Reaction" | "Sword And Shield Impact" | "Mutant Hit Reaction" | "Hit Reaction" |
+   | death | "Dying" | "Sword And Shield Death" | "Mutant Dying" | "Dying" |
 
 5. Run the prepare script. It scales, grounds, decimates and merges the clips:
 
    ```bash
    blender -b --python heretic-remake/art/tools/blender_prepare.py -- \
-       --in golem_skin.fbx --height 2.0 --max-tris 25000 \
-       --anim idle=Zombie_Idle.fbx --anim walk=Zombie_Walk.fbx \
-       --anim attack=Zombie_Punching.fbx --anim pain=Hit_Reaction.fbx \
-       --anim death=Zombie_Dying.fbx \
-       --out heretic-remake/assets/monsters/golem.glb
+       --in disciple_skin.fbx --height 1.85 --max-tris 25000 \
+       --anim idle=Idle.fbx --anim walk=Walking.fbx \
+       --anim attack=Standing_Melee_Attack_Horizontal.fbx --anim pain=Hit_Reaction.fbx \
+       --anim death=Dying.fbx \
+       --out heretic-remake/assets/monsters/disciple.glb
    ```
 
    It prints the final height, triangle count and which clips it found. Use
@@ -162,10 +171,11 @@ fits them by length or height (see the manifest).
   (that drops you in the great hall).
 - **Without rebuilding:** put the same folders in `mods/` next to the
   exported game, or pass `--mods=/path/to/folder`.
-- **Fine-tuning:** a `golem.json` next to `golem.glb` adjusts the fit:
-  `{"height": 2.1, "yaw": 0, "anims": {"attack": "Zombie_Punching"}}`.
+- **Fine-tuning:** a `disciple.json` next to `disciple.glb` adjusts the fit:
+  `{"height": 1.9, "yaw": 0, "anims": {"attack": "Standing_Melee_Attack_Horizontal"}}`.
 - **Automated check:**
   `"$GODOT" --headless --path heretic-remake res://tests/asset_override_test.tscn -- --mods=<folder with monsters/golem.glb>`
+  (the test reuses any model you give it as the golem)
 
 Check the asset as the brief asks:
 - at a distance in the hall,
@@ -183,7 +193,11 @@ Your starter project and this game share one model contract:
 
 The game maps `move` → walk and `hit` → pain automatically, so a character
 finished in the starter works here unchanged. Copy its `.glb` to
-`assets/monsters/<id>.glb`, using the ids from the manifest. The starter's
+`assets/monsters/<id>.glb`, using the ids from the manifest (`disciple`,
+`gryphon`, `hell_knight`, `ophidian`, `wraithverge`, `golem`, `sabreclaw`,
+`maulotaur`, `iron_liche`, `dsparil`, `corvus`). The starter's roster notes
+follow the 1994 designs; where they disagree with the design map (for example
+the Golem and the Iron Liche), the design map wins. The starter's
 `rigged_blockout.glb` was tested this way as the golem. Follow its
 `BLENDER_PIPELINE.md` and `MATERIALS.md` for production quality:
 - retopology and LODs

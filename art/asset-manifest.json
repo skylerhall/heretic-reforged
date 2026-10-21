@@ -2,12 +2,12 @@
   "schema_version": 1,
   "art_direction_brief": "art/art-direction-brief.md",
   "shared_prompt_blocks": {
-    "art_direction": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+    "art_direction": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
     "concept_view": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
     "lighting": "flat even studio light, no cast shadows, no rim light, no fog",
     "background": "plain neutral mid-gray (#808080) background",
-    "exclude": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements",
-    "img2img": "Use the reference sprite (4x upscaled by tools/extract_references.gd) as the init image at denoise 0.55-0.7 so the silhouette and colors stay; add an outline/depth ControlNet if available."
+    "exclude": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look",
+    "img2img": "Use the asset's FRONT view, cropped from its panel on the design map, as the init image at denoise 0.45-0.6 so the design stays; generate the 3D model from the result. The design map's SIDE and BACK views are the turnaround reference for checking the 3D model."
   },
   "wad_textures": {
     "how": "For playing your own HERETIC.WAD: every file in references/textures and references/flats can be replaced. Name the HD file exactly like the original (e.g. textures/GRSTNPB.png) at 8x size.",
@@ -16,358 +16,105 @@
   },
   "assets": [
     {
-      "id": "golem",
-      "role": "monster",
-      "path": "assets/monsters/golem.glb",
-      "status": "hero-target",
-      "technical": {
-        "height_m": 2.0,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "attack: overhead two-fist smash",
-          "walk: slow lumbering",
-          "pain",
-          "death: collapse forward"
-        ],
-        "rig": "Mixamo auto-rig"
-      },
-      "reference": {
-        "sprite_prefix": "MUMM",
-        "path": "references/sprites/MUMM_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Golem: a hulking mummified brute wrapped head to toe in grimy gray-brown bandages, broad stooped shoulders, very long heavy arms ending in bound fists, small head sunk between the shoulders, two small glowing red eyes in the wrappings",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "hunched bulk and long arms; red eyes",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      },
-      "notes": "hero asset: approve this one first"
-    },
-    {
-      "id": "nitrogolem",
-      "role": "monster",
-      "path": "assets/monsters/nitrogolem.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 2.0,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "attack: thrusts a hand forward releasing a flaming skull",
-          "walk",
-          "pain",
-          "death"
-        ],
-        "rig": "Mixamo auto-rig"
-      },
-      "reference": {
-        "sprite_prefix": "MUMM",
-        "path": "references/sprites/MUMM_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Nitrogolem: the same bandaged mummy brute as the Golem but leaner, with blue-gray bandages, glowing blue eyes and wisps of blue spirit fire around its hands",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "same silhouette as the golem, blue accents",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      },
-      "notes": "must match golem.glb proportions; consider retexturing the golem"
-    },
-    {
-      "id": "gargoyle",
-      "role": "monster",
-      "path": "assets/monsters/gargoyle.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 1.1,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "walk/idle: hovering with wing beats (fly loop)",
-          "attack: diving claw swipe",
-          "pain",
-          "death: falls"
-        ],
-        "rig": "manual (non-humanoid)"
-      },
-      "reference": {
-        "sprite_prefix": "IMPX",
-        "path": "references/sprites/IMPX_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Gargoyle: a small wiry red demon-imp with large leathery bat wings, curved horns, long pointed ears, clawed hands and feet, a thin whip tail, yellow glowing eyes",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "wings spread wide, horns",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      }
-    },
-    {
-      "id": "fire_gargoyle",
-      "role": "monster",
-      "path": "assets/monsters/fire_gargoyle.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 1.1,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "fly loop",
-          "attack: hurls a fireball",
-          "pain",
-          "death"
-        ],
-        "rig": "manual (non-humanoid)"
-      },
-      "reference": {
-        "sprite_prefix": "IMPX",
-        "path": "references/sprites/IMPX_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Fire Gargoyle: the same winged imp-gargoyle but with golden-orange skin, ember-glowing wing membranes and flames licking from its hands",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "same as gargoyle, orange-gold",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      },
-      "notes": "must match gargoyle.glb proportions"
-    },
-    {
-      "id": "warrior",
-      "role": "monster",
-      "path": "assets/monsters/warrior.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 2.2,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "walk: stiff march",
-          "attack: overhead axe throw",
-          "pain",
-          "death: armor collapses"
-        ],
-        "rig": "Mixamo auto-rig"
-      },
-      "reference": {
-        "sprite_prefix": "KNIG",
-        "path": "references/sprites/KNIG_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Undead Warrior: a tall skeletal knight in dented, tarnished dark plate armor with a horned visored helm and glowing red eye slits, carrying a large axe with a translucent glowing green ethereal blade",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "helm horns and the axe",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      }
-    },
-    {
-      "id": "warrior_ghost",
-      "role": "monster",
-      "path": "assets/monsters/warrior_ghost.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 2.2,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [],
-        "rig": "Mixamo auto-rig"
-      },
-      "reference": {
-        "sprite_prefix": "KNIG",
-        "path": "references/sprites/KNIG_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Undead Warrior ghost: identical to the Undead Warrior (the game renders it semi-transparent)",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      },
-      "notes": "optional; the game reuses warrior.glb and makes it translucent if this is missing"
-    },
-    {
       "id": "disciple",
       "role": "monster",
       "path": "assets/monsters/disciple.glb",
-      "status": "planned",
+      "status": "hero-target",
       "technical": {
-        "height_m": 2.0,
+        "height_m": 1.85,
         "max_triangles": 40000,
         "web_max_triangles": 15000,
         "animations": [
-          "idle/walk: floating sway",
-          "attack: both hands thrust forward casting",
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: flail swing",
           "pain",
           "death"
         ],
         "rig": "Mixamo auto-rig"
       },
       "reference": {
-        "sprite_prefix": "WZRD",
-        "path": "references/sprites/WZRD_sheet.png"
+        "design_map_panel": "DISCIPLE (melee enemy)",
+        "game_slots": [
+          "68 (golem slot)",
+          "69 ghost"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Disciple of D'Sparil: a floating sorcerer in a long tattered deep-purple robe with gold trim and a deep hood hiding the face except two glowing eyes; bony hands raised, crackling with violet magic; no visible legs, the robe hem trails into the air",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Disciple: a gaunt cultist in a deep red hooded robe with gold-embroidered hems, a rope belt and leather bracers, face hidden in the hood's shadow, swinging a spiked iron flail on a chain",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "hood, robe flare, raised hands",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "red hood and the flail",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
+        "costume",
+        "weapon"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "hero asset: the most common enemy and an easy humanoid rig; approve it in-game before the rest"
+    },
+    {
+      "id": "gryphon",
+      "role": "monster",
+      "path": "assets/monsters/gryphon.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.6,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: diving talon strike",
+          "pain",
+          "death"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "design_map_panel": "GRYPHON (basic enemy)",
+        "game_slots": [
+          "66 (gargoyle slot)",
+          "5 fire variant"
+        ]
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Gryphon: a large eagle-headed beast with a lion's body, tawny gold-brown feathers and fur, huge spread feathered wings, a hooked yellow beak and taloned forelegs",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "spread wings and eagle head",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -386,94 +133,46 @@
       }
     },
     {
-      "id": "sabreclaw",
+      "id": "hell_knight",
       "role": "monster",
-      "path": "assets/monsters/sabreclaw.glb",
+      "path": "assets/monsters/hell_knight.glb",
       "status": "planned",
       "technical": {
-        "height_m": 1.8,
+        "height_m": 2.3,
         "max_triangles": 40000,
         "web_max_triangles": 15000,
         "animations": [
-          "walk: fast prowl",
-          "attack: double claw slash",
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: axe throw / swing",
           "pain",
           "death"
         ],
         "rig": "Mixamo auto-rig"
       },
       "reference": {
-        "sprite_prefix": "CLNK",
-        "path": "references/sprites/CLNK_sheet.png"
+        "design_map_panel": "HELL KNIGHT (mid-tier enemy)",
+        "game_slots": [
+          "64 (undead warrior slot)",
+          "65 ghost"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Sabreclaw: a hunched, fast reptilian beast with tan-brown armored hide, a narrow fanged head and long scythe-like blade claws on both forearms",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Hell Knight: a towering knight in blackened, battle-dented plate armor with a horned visored helm and glowing red eye slits, a round iron shield with a gold boss on the left arm and a broad battle axe in the right hand",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "blade claws",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "horned helm, shield and axe",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
-      ],
-      "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
-        "attribution": "",
-        "prompt_or_source_record": ""
-      },
-      "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
-        "approved_by": ""
-      }
-    },
-    {
-      "id": "weredragon",
-      "role": "monster",
-      "path": "assets/monsters/weredragon.glb",
-      "status": "planned",
-      "technical": {
-        "height_m": 2.2,
-        "max_triangles": 40000,
-        "web_max_triangles": 15000,
-        "animations": [
-          "walk",
-          "attack: breathes fireballs",
-          "pain",
-          "death"
-        ],
-        "rig": "Mixamo auto-rig"
-      },
-      "reference": {
-        "sprite_prefix": "BEAS",
-        "path": "references/sprites/BEAS_sheet.png"
-      },
-      "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Weredragon: a burly bipedal dragon-beast with dark red scaled hide, a horned reptile snout, clawed hands, heavy tail, glowing amber eyes, smoke at the nostrils",
-        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "snout and horns, bulky torso",
-        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
-      },
-      "visual_locks": [
-        "silhouette",
-        "proportions",
-        "palette",
-        "signature details"
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -501,32 +200,36 @@
         "max_triangles": 40000,
         "web_max_triangles": 15000,
         "animations": [
-          "idle sway",
-          "attack: staff thrust firing energy",
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: staff thrust casting green fire",
           "pain",
           "death"
         ],
         "rig": "manual (non-humanoid)"
       },
       "reference": {
-        "sprite_prefix": "SNKE",
-        "path": "references/sprites/SNKE_sheet.png"
+        "design_map_panel": "OPHIDIAN (ranged enemy)",
+        "game_slots": [
+          "92"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Ophidian: an upright serpent-man with a long coiled green-scaled snake body instead of legs, a cobra-like head with yellow eyes and fangs, golden armlets, holding a short staff",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Ophidian: an upright serpent-man with a cobra head and yellow-green eyes, scaled purple and gold body, ornate gold armor plates and a purple robe, a coiled serpent tail, holding a staff topped with green fire",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "upright coil and cobra hood",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "cobra hood, coiled tail, green-fire staff",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -542,44 +245,48 @@
         "in_engine_reviewed": false,
         "technical_checks_passed": false,
         "approved_by": ""
-      },
-      "notes": "non-humanoid: rig manually in Blender or keep the procedural animation"
+      }
     },
     {
-      "id": "iron_lich",
+      "id": "wraithverge",
       "role": "monster",
-      "path": "assets/monsters/iron_lich.glb",
+      "path": "assets/monsters/wraithverge.glb",
       "status": "planned",
       "technical": {
-        "height_m": 2.2,
+        "height_m": 2.6,
         "max_triangles": 40000,
         "web_max_triangles": 15000,
         "animations": [
-          "idle: slow bob",
-          "attack: jaw opens",
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: both hands casting green magic",
+          "pain",
           "death"
         ],
         "rig": "manual (non-humanoid)"
       },
       "reference": {
-        "sprite_prefix": "HEAD",
-        "path": "references/sprites/HEAD_sheet.png"
+        "design_map_panel": "WRAITHVERGE (flying enemy)",
+        "game_slots": [
+          "15 (disciple of D'Sparil slot)"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Iron Lich: a gigantic floating skull bound in rusted iron bands and rivets, cavernous glowing ice-blue eye sockets, a broken jaw, trailing wisps of cold mist",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Wraithverge: a tall floating wraith in tattered, translucent teal-green shrouds and hood, skeletal clawed hands wreathed in green spectral fire, no visible legs, the shroud dissolving into mist",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "giant floating skull",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "hooded shroud and clawed hands",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -596,7 +303,122 @@
         "technical_checks_passed": false,
         "approved_by": ""
       },
-      "notes": "non-humanoid: a single mesh with simple bob animation is fine"
+      "notes": "Mixamo can rig it as a humanoid if the shroud has arm shapes; otherwise a simple bone chain"
+    },
+    {
+      "id": "golem",
+      "role": "monster",
+      "path": "assets/monsters/golem.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.4,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: two-fist smash / hurl lava rock",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "design_map_panel": "GOLEM (heavy enemy)",
+        "game_slots": [
+          "45 (nitrogolem slot)",
+          "46 ghost"
+        ]
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Golem: a massive hulking brute made of dark cracked stone plates, molten orange lava glowing through the cracks, huge fists, small head sunk between enormous shoulders",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "massive stone bulk with glowing cracks",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "costume",
+        "weapon"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "sabreclaw",
+      "role": "monster",
+      "path": "assets/monsters/sabreclaw.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.8,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: pounce and claw",
+          "pain",
+          "death"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "design_map_panel": "SABRECLAW (fast enemy)",
+        "game_slots": [
+          "90"
+        ]
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Sabreclaw: a fast, lean, hairless muscular beast with pale tan skin, a fanged wolf-like snout, long curved claws on all limbs, crouched on all fours ready to pounce",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "low crouch and long claws",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "costume",
+        "weapon"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
     },
     {
       "id": "maulotaur",
@@ -604,36 +426,40 @@
       "path": "assets/monsters/maulotaur.glb",
       "status": "planned",
       "technical": {
-        "height_m": 3.2,
+        "height_m": 3.0,
         "max_triangles": 60000,
         "web_max_triangles": 15000,
         "animations": [
-          "walk",
-          "attack: hammer slam and charge",
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: axe slam / charge",
           "pain",
           "death"
         ],
         "rig": "Mixamo auto-rig"
       },
       "reference": {
-        "sprite_prefix": "MNTR",
-        "path": "references/sprites/MNTR_sheet.png"
+        "design_map_panel": "MAULOTAUR (heavy enemy)",
+        "game_slots": [
+          "9"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "Maulotaur: a towering bull-headed minotaur with massive curved horns, brown fur, bronze armored shoulder plates and belt, wielding a huge two-handed iron hammer",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Maulotaur: a huge minotaur with great curved horns, dark brown fur, bronze armor plates and leather straps, wielding an enormous double-bladed battle axe",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "horns and hammer, enormous bulk",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "horns, bulk and the giant axe",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -649,8 +475,64 @@
         "in_engine_reviewed": false,
         "technical_checks_passed": false,
         "approved_by": ""
+      }
+    },
+    {
+      "id": "iron_liche",
+      "role": "monster",
+      "path": "assets/monsters/iron_liche.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.5,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: casting purple bolts",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
       },
-      "notes": "boss: 60k triangle budget"
+      "reference": {
+        "design_map_panel": "IRON LICHE (ranged enemy)",
+        "game_slots": [
+          "6"
+        ]
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Iron Liche: a skeletal sorcerer in ornate purple and gold robes and black iron armor, a tall horned cowl, carrying a scythe-like staff crowned with a glowing purple orb",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "horned cowl and orb staff",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "costume",
+        "weapon"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
     },
     {
       "id": "dsparil",
@@ -658,11 +540,12 @@
       "path": "assets/monsters/dsparil.glb",
       "status": "planned",
       "technical": {
-        "height_m": 3.0,
+        "height_m": 3.4,
         "max_triangles": 60000,
         "web_max_triangles": 15000,
         "animations": [
-          "idle",
+          "idle (loop)",
+          "walk (loop, in place)",
           "attack: casting",
           "pain",
           "death"
@@ -670,24 +553,27 @@
         "rig": "Mixamo auto-rig"
       },
       "reference": {
-        "sprite_prefix": "SOR2",
-        "path": "references/sprites/SOR2_sheet.png"
+        "design_map_panel": "D'SPARIL (final boss)",
+        "game_slots": [
+          "7"
+        ]
       },
       "prompt": {
-        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
-        "SUBJECT": "D'Sparil: a tall gaunt sorcerer-king in long layered blue and crimson robes with gold filigree, a tall horned crown, pale gray skin and glowing pale-blue eyes, one hand raised with crackling blue lightning",
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "D'Sparil: a towering sorcerer-king in layered purple and gold armored robes with a high horned golden crown, pale gray skin, glowing violet eyes, a swirling ring of purple magic orbs around his raised hand",
         "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
-        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
-        "GAME-SCALE READ": "crown horns and robe silhouette",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "crown horns, flared robes, magic ring",
         "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
-        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
-        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
       },
       "visual_locks": [
         "silhouette",
         "proportions",
         "palette",
-        "signature details"
+        "costume",
+        "weapon"
       ],
       "source": {
         "kind": "generated",
@@ -703,8 +589,64 @@
         "in_engine_reviewed": false,
         "technical_checks_passed": false,
         "approved_by": ""
+      }
+    },
+    {
+      "id": "corvus",
+      "role": "player model",
+      "path": "assets/monsters/corvus.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.85,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle (loop)",
+          "walk (loop, in place)",
+          "attack: staff cast",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
       },
-      "notes": "boss; his serpent mount (SRCR) can be a separate model later"
+      "reference": {
+        "design_map_panel": "CORVUS (player character)",
+        "game_slots": [
+          "player body: not shown in first person yet; for future cutscenes/third person"
+        ]
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
+        "SUBJECT": "Corvus: a hero mage in a deep red hooded cloak and robe with gold embroidery and leather straps, a weathered determined human face, holding a tall ornate staff topped with a glowing blue crystal orb",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "dark gothic fantasy, realistic high-fidelity game character matching the HD Character & Monster Design Template; physically based materials (embroidered cloth, dented dark plate armor, worn leather, skin, cracked stone, magic energy); worn edges and grime",
+        "GAME-SCALE READ": "red hood and blue-orb staff",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "match the design map panel: silhouette, costume, colors, weapon",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements, original 1994 sprite look"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "costume",
+        "weapon"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
     },
     {
       "id": "staff",
@@ -812,7 +754,7 @@
       "path": "assets/weapons/wand.glb",
       "status": "planned",
       "technical": {
-        "length_m": 0.48,
+        "length_m": 0.6,
         "max_triangles": 8000,
         "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
         "animations": [
@@ -821,12 +763,11 @@
         ]
       },
       "reference": {
-        "sprite_prefix": "GWND",
-        "path": "references/sprites/GWND_sheet.png"
+        "design_map_panel": "WEAPON VIEW (FIRST PERSON)"
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
-        "SUBJECT": "the Elven Wand: a slim golden wand with a curved ornate grip and a faceted glowing yellow crystal at the tip",
+        "SUBJECT": "Corvus's staff from the design map's WEAPON VIEW panel: an ornate dark-bronze staff whose head is a spiked crown of metal claws holding a glowing blue crystal orb crackling with blue lightning",
         "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
         "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
         "GAME-SCALE READ": "the tip and its glow",
@@ -3035,5 +2976,6 @@
         "approved_by": ""
       }
     }
-  ]
+  ],
+  "design_map": "HD Character & Monster Design Template (Heretic): the visual target for every character. Crop each panel's FRONT/SIDE/BACK views from it as references."
 }
