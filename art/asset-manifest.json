@@ -38,7 +38,12 @@
         "game_slots": [
           "68 (golem slot)",
           "69 ghost"
-        ]
+        ],
+        "images": {
+          "back": "art/references/disciple/back.png",
+          "front": "art/references/disciple/front.png",
+          "side": "art/references/disciple/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -97,7 +102,11 @@
         "game_slots": [
           "66 (gargoyle slot)",
           "5 fire variant"
-        ]
+        ],
+        "images": {
+          "back": "art/references/gryphon/back.png",
+          "front": "art/references/gryphon/front.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -155,7 +164,12 @@
         "game_slots": [
           "64 (undead warrior slot)",
           "65 ghost"
-        ]
+        ],
+        "images": {
+          "back": "art/references/hell_knight/back.png",
+          "front": "art/references/hell_knight/front.png",
+          "side": "art/references/hell_knight/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -212,7 +226,12 @@
         "design_map_panel": "OPHIDIAN (ranged enemy)",
         "game_slots": [
           "92"
-        ]
+        ],
+        "images": {
+          "back": "art/references/ophidian/back.png",
+          "front": "art/references/ophidian/front.png",
+          "side": "art/references/ophidian/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -269,7 +288,12 @@
         "design_map_panel": "WRAITHVERGE (flying enemy)",
         "game_slots": [
           "15 (disciple of D'Sparil slot)"
-        ]
+        ],
+        "images": {
+          "back": "art/references/wraithverge/back.png",
+          "front": "art/references/wraithverge/front.png",
+          "side": "art/references/wraithverge/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -328,7 +352,12 @@
         "game_slots": [
           "45 (nitrogolem slot)",
           "46 ghost"
-        ]
+        ],
+        "images": {
+          "back": "art/references/golem/back.png",
+          "front": "art/references/golem/front.png",
+          "side": "art/references/golem/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -385,7 +414,12 @@
         "design_map_panel": "SABRECLAW (fast enemy)",
         "game_slots": [
           "90"
-        ]
+        ],
+        "images": {
+          "back": "art/references/sabreclaw/back.png",
+          "front": "art/references/sabreclaw/front.png",
+          "side": "art/references/sabreclaw/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -442,7 +476,12 @@
         "design_map_panel": "MAULOTAUR (heavy enemy)",
         "game_slots": [
           "9"
-        ]
+        ],
+        "images": {
+          "back": "art/references/maulotaur/back.png",
+          "front": "art/references/maulotaur/front.png",
+          "side": "art/references/maulotaur/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -499,7 +538,12 @@
         "design_map_panel": "IRON LICHE (ranged enemy)",
         "game_slots": [
           "6"
-        ]
+        ],
+        "images": {
+          "back": "art/references/iron_liche/back.png",
+          "front": "art/references/iron_liche/front.png",
+          "side": "art/references/iron_liche/side.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -556,7 +600,11 @@
         "design_map_panel": "D'SPARIL (final boss)",
         "game_slots": [
           "7"
-        ]
+        ],
+        "images": {
+          "back": "art/references/dsparil/back.png",
+          "front": "art/references/dsparil/front.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -613,7 +661,14 @@
         "design_map_panel": "CORVUS (player character)",
         "game_slots": [
           "player body: not shown in first person yet; for future cutscenes/third person"
-        ]
+        ],
+        "images": {
+          "back": "art/references/corvus/back.png",
+          "closeup": "art/references/corvus/closeup.png",
+          "front": "art/references/corvus/front.png",
+          "side": "art/references/corvus/side.png",
+          "side2": "art/references/corvus/side2.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image for a game character, used to generate a 3D model",
@@ -763,7 +818,10 @@
         ]
       },
       "reference": {
-        "design_map_panel": "WEAPON VIEW (FIRST PERSON)"
+        "design_map_panel": "WEAPON VIEW (FIRST PERSON)",
+        "images": {
+          "first_person": "art/references/weapon_staff/first_person.png"
+        }
       },
       "prompt": {
         "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
@@ -2977,5 +3035,5 @@
       }
     }
   ],
-  "design_map": "HD Character & Monster Design Template (Heretic): the visual target for every character. Crop each panel's FRONT/SIDE/BACK views from it as references."
+  "design_map": "art/design-map.png (cut into per-view references in art/references/ by tools/crop_design_map.gd; check art/design-map-crops.png)"
 }

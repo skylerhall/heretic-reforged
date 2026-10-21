@@ -2,9 +2,10 @@
 
 The visual target is the **HD Character & Monster Design Template** (the design
 map): a dark gothic fantasy reimagining of Heretic, rendered realistically.
-Every character must match its panel on the map: the front, side and back
-views, the costume, colors and weapon. Add the map to the repository as
-`art/design-map.png` so the whole pipeline can point at it.
+Every character must match its panel on the map
+([`design-map.png`](design-map.png)): the front, side and back views, the
+costume, colors and weapon. Per-view references are in
+[`references/`](references/) (see [`design-map-crops.png`](design-map-crops.png)).
 
 ## Game frame
 
@@ -123,7 +124,7 @@ views, the costume, colors and weapon. Add the map to the repository as
   - The red cloth doesn't turn to mud under torchlight.
   - It sits right next to the HUD at native resolution.
 - **Do:**
-  - Crop the panel's front view as the image-to-image init.
+  - Use `references/<id>/front.png` as the image-to-image init.
   - Check the 3D model against the panel's side and back views.
   - Keep the gold trim and colors exactly as on the map.
 - **Don't:**

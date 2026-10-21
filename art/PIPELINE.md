@@ -53,10 +53,16 @@ before relying on it.
 
 ## 1. References
 
-**Characters:** crop each character's panel from the design map into three
-images: `front`, `side`, `back` (Preview on a Mac: select → Crop). The front
-view feeds image-to-image; the side and back views are for checking the 3D
-model. Save the full map as `art/design-map.png` in the repository.
+**Characters:** already done. `art/design-map.png` is cut into one image per
+view in `art/references/<id>/` (`front.png`, `side.png`, `back.png`, 3×
+upscaled), plus the first-person staff, Corvus's close-up and the material
+swatches. The front view feeds image-to-image; the side and back views are
+for checking the 3D model. If you update the map, re-run the cutter and look
+at `art/design-map-crops.png` to check the boxes:
+
+```bash
+"$GODOT" --headless --path . -s res://tools/crop_design_map.gd
+```
 
 **Level textures (optional, only for playing your own WAD in HD):** extract the
 originals. From the repository folder:
