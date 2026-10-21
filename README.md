@@ -33,8 +33,9 @@ in a web browser, on Windows and on macOS.
 | Pause | Esc |
 
 Web builds can start straight into the level with
-`index.html?autostart`, and `&warp=x,y,angle` (map units) places the
-player somewhere specific.
+`index.html?autostart`. Add `&warp=x,y,angle` (map units) to place the player
+somewhere specific, and `&peaceful` to make monsters ignore you, which is handy
+for looking at art in the game.
 
 ## Run and build
 

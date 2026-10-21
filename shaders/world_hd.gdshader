@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_back, depth_draw_opaque;
+render_mode cull_back, depth_draw_opaque, ambient_light_disabled;
 
 #define HD
 #include "res://shaders/world.gdshaderinc"

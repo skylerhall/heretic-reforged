@@ -128,6 +128,8 @@ func _physics_process(dt: float) -> void:
 
 
 func _can_see(p: Player, use_fov: bool) -> bool:
+	if Game.peaceful:
+		return false
 	if p.dead:
 		return false
 	var to_p := p.global_position - global_position
@@ -159,6 +161,8 @@ func _wake(p: Player) -> void:
 
 ## Gunfire is heard nearby; ambushers still wait until they see you.
 func hear(at: Vector3) -> void:
+	if Game.peaceful:
+		return
 	if dead or state != State.IDLE:
 		return
 	if global_position.distance_to(at) < 28.0:

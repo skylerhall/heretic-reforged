@@ -7,3 +7,9 @@ export_credentials.cfg
 # Never commit game data you don't have the rights to share
 *.wad
 *.WAD
+
+# Textures Godot extracts from imported models (regenerated on import)
+assets/monsters/*.png
+assets/weapons/*.png
+assets/items/*.png
+assets/decor/*.png

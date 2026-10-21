@@ -161,6 +161,10 @@ def main():
     if rig is not None:
         if rig.animation_data:
             rig.animation_data.action = None
+            # the importer already made one track per clip; start clean so
+            # every clip is exported once, under its game name
+            for track in list(rig.animation_data.nla_tracks):
+                rig.animation_data.nla_tracks.remove(track)
         for state, act in named.items():
             add_to_nla(rig, act, state)
     elif named:

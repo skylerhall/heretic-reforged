@@ -19,7 +19,7 @@
       "id": "disciple",
       "role": "monster",
       "path": "assets/monsters/disciple.glb",
-      "status": "hero-target",
+      "status": "stand-in (awaiting approval)",
       "technical": {
         "height_m": 1.85,
         "max_triangles": 40000,
@@ -31,7 +31,9 @@
           "pain",
           "death"
         ],
-        "rig": "Mixamo auto-rig"
+        "rig": "Mixamo auto-rig",
+        "triangles": 7096,
+        "bones": 15
       },
       "reference": {
         "design_map_panel": "DISCIPLE (melee enemy)",
@@ -63,21 +65,21 @@
         "weapon"
       ],
       "source": {
-        "kind": "generated",
-        "url_or_tool": "",
-        "creator": "",
-        "created_at": "",
-        "license": "",
+        "kind": "authored (procedural Blender script)",
+        "url_or_tool": "art/tools/build_disciple.py, Blender 5.2, textures generated with numpy",
+        "creator": "Claude Code",
+        "created_at": "2026-10-21",
+        "license": "same as this repository",
         "attribution": "",
-        "prompt_or_source_record": ""
+        "prompt_or_source_record": "art/references/disciple/{front,side,back}.png"
       },
       "verification": {
-        "native_scale_reviewed": false,
-        "in_engine_reviewed": false,
-        "technical_checks_passed": false,
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
         "approved_by": ""
       },
-      "notes": "hero asset: the most common enemy and an easy humanoid rig; approve it in-game before the rest"
+      "notes": "Hand-built stand-in: modeled by art/tools/build_disciple.py in Blender from the design map's front/side/back views, because the AI steps need a GPU. Replace assets/monsters/disciple.glb with the AI-made model when ready. Previews: art/previews/disciple_*.png"
     },
     {
       "id": "gryphon",

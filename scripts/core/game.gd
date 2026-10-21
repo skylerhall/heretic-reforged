@@ -13,6 +13,7 @@ var quality: int = Quality.HIGH
 var mouse_sensitivity := 0.15
 var invert_mouse := false
 var skill := 2              # 0..4, like the original's five skill levels
+var peaceful := false       # monsters never notice the player (art review)
 var carry: Dictionary = {}  # player state handed to the next map
 var world = null            # the running World, if any
 var main = null

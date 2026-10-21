@@ -30,6 +30,10 @@ game-ready .glb  ──►  assets/monsters/disciple.glb  ──►  in game
 > copyrighted: keep them private. Check the license of every AI model you use
 > (noted below).
 
+A hand-built stand-in Disciple is already in the game
+(`assets/monsters/disciple.glb`, made by `art/tools/build_disciple.py`; see
+`art/previews/`). Making the AI version replaces it: just overwrite the file.
+
 Start with **one hero asset: the Disciple**. Take it all the way into the game
 and judge it there before making the rest (see "Visual target" in the brief).
 
@@ -174,7 +178,9 @@ fits them by length or height (see the manifest).
 - **In the project:** files in `assets/<kind>/` load automatically.
   Run the game from Godot, or with
   `"$GODOT" --path . -- --autostart --warp=960,384,0`
-  (that drops you in the great hall).
+  (that drops you in the great hall). Add `--peaceful` (web: `&peaceful`) so
+  monsters don't notice you while you look at your art: e.g.
+  `?autostart&peaceful&warp=1280,760,270,-4` faces a Disciple from 4 m.
 - **Without rebuilding:** put the same folders in `mods/` next to the
   exported game, or pass `--mods=/path/to/folder`.
 - **Fine-tuning:** a `disciple.json` next to `disciple.glb` adjusts the fit:

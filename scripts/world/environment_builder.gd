@@ -25,9 +25,12 @@ static func build(world: Node3D, map: MapData, tex: TextureLibrary) -> void:
 		proc.sky_energy_multiplier = 1.4
 		sky.sky_material = proc
 	env.sky = sky
+	# Level surfaces light themselves from their sector's light level (see
+	# world.gdshaderinc) and ignore ambient; ambient is the matching fill for
+	# characters, items and weapons, which have ordinary PBR materials.
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(0.55, 0.5, 0.6)
-	env.ambient_light_energy = 0.12
+	env.ambient_light_color = Color(0.62, 0.55, 0.58)
+	env.ambient_light_energy = 0.55
 	env.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 	env.tonemap_mode = Environment.TONE_MAPPER_ACES
 	env.tonemap_exposure = 1.1

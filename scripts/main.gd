@@ -37,14 +37,16 @@ func _ready() -> void:
 	Game.find_existing_wad()
 	menus.show_title()
 	var args := _launch_args()
+	Game.peaceful = args.has("peaceful")
 	if args.has("autostart"):
 		await start_level("", {})
 		if args.has("warp"):
 			_warp(args.warp)
 
 
-## Launch options from the command line (`-- --autostart --warp=x,y,angle`)
-## or, on the web, the page URL (`?autostart&warp=x,y,angle`).
+## Launch options from the command line (`-- --autostart --warp=x,y,angle --peaceful`)
+## or, on the web, the page URL (`?autostart&warp=x,y,angle&peaceful`).
+## peaceful: monsters never notice you, for looking at art in the game.
 func _launch_args() -> Dictionary:
 	var out := {}
 	var parts: PackedStringArray = OS.get_cmdline_user_args()
