@@ -1,0 +1,3039 @@
+{
+  "schema_version": 1,
+  "art_direction_brief": "art/art-direction-brief.md",
+  "shared_prompt_blocks": {
+    "art_direction": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+    "concept_view": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+    "lighting": "flat even studio light, no cast shadows, no rim light, no fog",
+    "background": "plain neutral mid-gray (#808080) background",
+    "exclude": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements",
+    "img2img": "Use the reference sprite (4x upscaled by tools/extract_references.gd) as the init image at denoise 0.55-0.7 so the silhouette and colors stay; add an outline/depth ControlNet if available."
+  },
+  "wad_textures": {
+    "how": "For playing your own HERETIC.WAD: every file in references/textures and references/flats can be replaced. Name the HD file exactly like the original (e.g. textures/GRSTNPB.png) at 8x size.",
+    "prompt": "seamless tileable PBR texture, realistic high-fidelity version of this exact texture, same layout, same colors, same stone/metal/wood pattern, flat even light, no baked shadows",
+    "img2img": "init image: the original texture upscaled 8x; denoise 0.35-0.5; tiling on"
+  },
+  "assets": [
+    {
+      "id": "golem",
+      "role": "monster",
+      "path": "assets/monsters/golem.glb",
+      "status": "hero-target",
+      "technical": {
+        "height_m": 2.0,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "attack: overhead two-fist smash",
+          "walk: slow lumbering",
+          "pain",
+          "death: collapse forward"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "MUMM",
+        "path": "references/sprites/MUMM_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Golem: a hulking mummified brute wrapped head to toe in grimy gray-brown bandages, broad stooped shoulders, very long heavy arms ending in bound fists, small head sunk between the shoulders, two small glowing red eyes in the wrappings",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "hunched bulk and long arms; red eyes",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "hero asset: approve this one first"
+    },
+    {
+      "id": "nitrogolem",
+      "role": "monster",
+      "path": "assets/monsters/nitrogolem.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.0,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "attack: thrusts a hand forward releasing a flaming skull",
+          "walk",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "MUMM",
+        "path": "references/sprites/MUMM_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Nitrogolem: the same bandaged mummy brute as the Golem but leaner, with blue-gray bandages, glowing blue eyes and wisps of blue spirit fire around its hands",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "same silhouette as the golem, blue accents",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "must match golem.glb proportions; consider retexturing the golem"
+    },
+    {
+      "id": "gargoyle",
+      "role": "monster",
+      "path": "assets/monsters/gargoyle.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.1,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "walk/idle: hovering with wing beats (fly loop)",
+          "attack: diving claw swipe",
+          "pain",
+          "death: falls"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "sprite_prefix": "IMPX",
+        "path": "references/sprites/IMPX_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Gargoyle: a small wiry red demon-imp with large leathery bat wings, curved horns, long pointed ears, clawed hands and feet, a thin whip tail, yellow glowing eyes",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "wings spread wide, horns",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "fire_gargoyle",
+      "role": "monster",
+      "path": "assets/monsters/fire_gargoyle.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.1,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "fly loop",
+          "attack: hurls a fireball",
+          "pain",
+          "death"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "sprite_prefix": "IMPX",
+        "path": "references/sprites/IMPX_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Fire Gargoyle: the same winged imp-gargoyle but with golden-orange skin, ember-glowing wing membranes and flames licking from its hands",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "same as gargoyle, orange-gold",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "must match gargoyle.glb proportions"
+    },
+    {
+      "id": "warrior",
+      "role": "monster",
+      "path": "assets/monsters/warrior.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.2,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "walk: stiff march",
+          "attack: overhead axe throw",
+          "pain",
+          "death: armor collapses"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "KNIG",
+        "path": "references/sprites/KNIG_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Undead Warrior: a tall skeletal knight in dented, tarnished dark plate armor with a horned visored helm and glowing red eye slits, carrying a large axe with a translucent glowing green ethereal blade",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "helm horns and the axe",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "warrior_ghost",
+      "role": "monster",
+      "path": "assets/monsters/warrior_ghost.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.2,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "KNIG",
+        "path": "references/sprites/KNIG_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Undead Warrior ghost: identical to the Undead Warrior (the game renders it semi-transparent)",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "optional; the game reuses warrior.glb and makes it translucent if this is missing"
+    },
+    {
+      "id": "disciple",
+      "role": "monster",
+      "path": "assets/monsters/disciple.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.0,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle/walk: floating sway",
+          "attack: both hands thrust forward casting",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "WZRD",
+        "path": "references/sprites/WZRD_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Disciple of D'Sparil: a floating sorcerer in a long tattered deep-purple robe with gold trim and a deep hood hiding the face except two glowing eyes; bony hands raised, crackling with violet magic; no visible legs, the robe hem trails into the air",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "hood, robe flare, raised hands",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "sabreclaw",
+      "role": "monster",
+      "path": "assets/monsters/sabreclaw.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.8,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "walk: fast prowl",
+          "attack: double claw slash",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "CLNK",
+        "path": "references/sprites/CLNK_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Sabreclaw: a hunched, fast reptilian beast with tan-brown armored hide, a narrow fanged head and long scythe-like blade claws on both forearms",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "blade claws",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "weredragon",
+      "role": "monster",
+      "path": "assets/monsters/weredragon.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.2,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "walk",
+          "attack: breathes fireballs",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "BEAS",
+        "path": "references/sprites/BEAS_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Weredragon: a burly bipedal dragon-beast with dark red scaled hide, a horned reptile snout, clawed hands, heavy tail, glowing amber eyes, smoke at the nostrils",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "snout and horns, bulky torso",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "ophidian",
+      "role": "monster",
+      "path": "assets/monsters/ophidian.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.2,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle sway",
+          "attack: staff thrust firing energy",
+          "pain",
+          "death"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "sprite_prefix": "SNKE",
+        "path": "references/sprites/SNKE_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Ophidian: an upright serpent-man with a long coiled green-scaled snake body instead of legs, a cobra-like head with yellow eyes and fangs, golden armlets, holding a short staff",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "upright coil and cobra hood",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "non-humanoid: rig manually in Blender or keep the procedural animation"
+    },
+    {
+      "id": "iron_lich",
+      "role": "monster",
+      "path": "assets/monsters/iron_lich.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 2.2,
+        "max_triangles": 40000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle: slow bob",
+          "attack: jaw opens",
+          "death"
+        ],
+        "rig": "manual (non-humanoid)"
+      },
+      "reference": {
+        "sprite_prefix": "HEAD",
+        "path": "references/sprites/HEAD_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Iron Lich: a gigantic floating skull bound in rusted iron bands and rivets, cavernous glowing ice-blue eye sockets, a broken jaw, trailing wisps of cold mist",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "giant floating skull",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "non-humanoid: a single mesh with simple bob animation is fine"
+    },
+    {
+      "id": "maulotaur",
+      "role": "monster",
+      "path": "assets/monsters/maulotaur.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 3.2,
+        "max_triangles": 60000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "walk",
+          "attack: hammer slam and charge",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "MNTR",
+        "path": "references/sprites/MNTR_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "Maulotaur: a towering bull-headed minotaur with massive curved horns, brown fur, bronze armored shoulder plates and belt, wielding a huge two-handed iron hammer",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "horns and hammer, enormous bulk",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "boss: 60k triangle budget"
+    },
+    {
+      "id": "dsparil",
+      "role": "monster",
+      "path": "assets/monsters/dsparil.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 3.0,
+        "max_triangles": 60000,
+        "web_max_triangles": 15000,
+        "animations": [
+          "idle",
+          "attack: casting",
+          "pain",
+          "death"
+        ],
+        "rig": "Mixamo auto-rig"
+      },
+      "reference": {
+        "sprite_prefix": "SOR2",
+        "path": "references/sprites/SOR2_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image for a game monster, used to generate a 3D model",
+        "SUBJECT": "D'Sparil: a tall gaunt sorcerer-king in long layered blue and crimson robes with gold filigree, a tall horned crown, pale gray skin and glowing pale-blue eyes, one hand raised with crackling blue lightning",
+        "VIEW": "full body, centered, three-quarter front view, arms slightly away from the body (A-pose for humanoids), whole silhouette visible with margin",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "crown horns and robe silhouette",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original sprite's silhouette, proportions and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "notes": "boss; his serpent mount (SRCR) can be a separate model later"
+    },
+    {
+      "id": "staff",
+      "role": "first-person weapon",
+      "path": "assets/weapons/staff.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.9,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "STFF",
+        "path": "references/sprites/STFF_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "a gnarled wooden quarterstaff with an iron-shod tip",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "gauntlets",
+      "role": "first-person weapon",
+      "path": "assets/weapons/gauntlets.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.4,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "GAUN",
+        "path": "references/sprites/GAUN_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "armored spiked gauntlets of dark iron crackling with green necromantic energy",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "wand",
+      "role": "first-person weapon",
+      "path": "assets/weapons/wand.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.48,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "GWND",
+        "path": "references/sprites/GWND_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Elven Wand: a slim golden wand with a curved ornate grip and a faceted glowing yellow crystal at the tip",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "crossbow",
+      "role": "first-person weapon",
+      "path": "assets/weapons/crossbow.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.6,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "CRBW",
+        "path": "references/sprites/CRBW_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Ethereal Crossbow: an ornate crossbow with green-tinted metal limbs, a dark wooden stock and a glowing green ethereal bolt nocked",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "claw",
+      "role": "first-person weapon",
+      "path": "assets/weapons/claw.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.45,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "BLSR",
+        "path": "references/sprites/BLSR_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Dragon Claw: a blue steel gauntlet-launcher shaped like a dragon's talon gripping a glowing blue orb",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "hellstaff",
+      "role": "first-person weapon",
+      "path": "assets/weapons/hellstaff.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.75,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "HROD",
+        "path": "references/sprites/HROD_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Hellstaff: a black iron staff topped with a horned skull whose eye sockets glow red, red runes along the shaft",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "phoenix",
+      "role": "first-person weapon",
+      "path": "assets/weapons/phoenix.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.62,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "PHNX",
+        "path": "references/sprites/PHNX_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Phoenix Rod: a golden rod ending in a stylized phoenix head holding a glowing orange crystal",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "mace",
+      "role": "first-person weapon",
+      "path": "assets/weapons/mace.glb",
+      "status": "planned",
+      "technical": {
+        "length_m": 0.56,
+        "max_triangles": 8000,
+        "orientation": "pointing along +Z in Blender front view (the game flips it to point away from the camera)",
+        "animations": [
+          "idle (optional)",
+          "fire (optional)"
+        ]
+      },
+      "reference": {
+        "sprite_prefix": "MACE",
+        "path": "references/sprites/MACE_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a held weapon, used to generate a 3D model",
+        "SUBJECT": "the Firemace: a heavy dark-iron mace-launcher with a spiked head studded with silver spheres",
+        "VIEW": "the weapon alone, side view, horizontal, pointing right, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "the tip and its glow",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original weapon's shape and colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "vial",
+      "role": "pickup",
+      "path": "assets/items/vial.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "PTN1",
+        "path": "references/sprites/PTN1_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a small round crystal vial of glowing blue healing liquid with a cork",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "flask",
+      "role": "pickup",
+      "path": "assets/items/flask.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "PTN2",
+        "path": "references/sprites/PTN2_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a quartz flask of glowing red liquid with a gold neck band",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "urn",
+      "role": "pickup",
+      "path": "assets/items/urn.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "SPHL",
+        "path": "references/sprites/SPHL_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Mystic Urn: an ornate gold urn with a glowing red stone lid",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "tome",
+      "role": "pickup",
+      "path": "assets/items/tome.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "PWBK",
+        "path": "references/sprites/PWBK_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Tome of Power: a thick red leather-bound spellbook with gold corners and a glowing amber gem on the cover",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "wings",
+      "role": "pickup",
+      "path": "assets/items/wings.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "SOAR",
+        "path": "references/sprites/SOAR_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Wings of Wrath: a pair of golden feathered wings joined at a jeweled clasp",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "ring",
+      "role": "pickup",
+      "path": "assets/items/ring.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "INVU",
+        "path": "references/sprites/INVU_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Ring of Invincibility: a heavy gold ring with a blazing white-blue gem",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "shadow",
+      "role": "pickup",
+      "path": "assets/items/shadow.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "INVS",
+        "path": "references/sprites/INVS_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Shadowsphere: a smoky translucent dark-violet glass orb",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "torch",
+      "role": "pickup",
+      "path": "assets/items/torch.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "TRCH",
+        "path": "references/sprites/TRCH_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a hand torch of wrapped wood with a burning head",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "bomb",
+      "role": "pickup",
+      "path": "assets/items/bomb.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "FBMB",
+        "path": "references/sprites/FBMB_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Time Bomb of the Ancients: a dark iron sphere bomb with brass bands and a short lit fuse",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "chaos",
+      "role": "pickup",
+      "path": "assets/items/chaos.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "ATLP",
+        "path": "references/sprites/ATLP_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Chaos Device: a purple crystal cube set in a bronze frame with swirling sigils",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "shield_silver",
+      "role": "pickup",
+      "path": "assets/items/shield_silver.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "SHLD",
+        "path": "references/sprites/SHLD_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a round polished silver shield with a red gem boss",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "shield_enchanted",
+      "role": "pickup",
+      "path": "assets/items/shield_enchanted.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "SHD2",
+        "path": "references/sprites/SHD2_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "an ornate shield of green-gold metal with a glowing green gem boss",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "bag",
+      "role": "pickup",
+      "path": "assets/items/bag.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "BAGH",
+        "path": "references/sprites/BAGH_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "the Bag of Holding: a worn leather pouch with a drawstring",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "key_yellow",
+      "role": "pickup",
+      "path": "assets/items/key_yellow.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "CKYY",
+        "path": "references/sprites/CKYY_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a large ornate key made of glowing yellow crystal",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "key_green",
+      "role": "pickup",
+      "path": "assets/items/key_green.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "AKYY",
+        "path": "references/sprites/AKYY_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a large ornate key made of glowing green crystal",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "key_blue",
+      "role": "pickup",
+      "path": "assets/items/key_blue.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "BKYY",
+        "path": "references/sprites/BKYY_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a large ornate key made of glowing blue crystal",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "wand_ammo",
+      "role": "pickup",
+      "path": "assets/items/wand_ammo.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "AMG1",
+        "path": "references/sprites/AMG1_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a single faceted yellow wand crystal",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "arrows",
+      "role": "pickup",
+      "path": "assets/items/arrows.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "AMC1",
+        "path": "references/sprites/AMC1_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a small bundle of glowing green ethereal arrows",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "flame_orb",
+      "role": "pickup",
+      "path": "assets/items/flame_orb.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.45,
+        "max_triangles": 3000
+      },
+      "reference": {
+        "sprite_prefix": "AMP1",
+        "path": "references/sprites/AMP1_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a pickup item, used to generate a 3D model",
+        "SUBJECT": "a small orb of contained fire in a gold cage",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "readable shape and glow color",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original item's colors",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "brazier",
+      "role": "decoration",
+      "path": "assets/decor/brazier.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.3,
+        "max_triangles": 5000
+      },
+      "reference": {
+        "sprite_prefix": "KFR1",
+        "path": "references/sprites/KFR1_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a level prop, used to generate a 3D model",
+        "SUBJECT": "a cast-iron fire brazier bowl on a three-legged stand (flames are added by the game)",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "silhouette",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original prop's shape",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "serpent_torch",
+      "role": "decoration",
+      "path": "assets/decor/serpent_torch.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.9,
+        "max_triangles": 5000
+      },
+      "reference": {
+        "sprite_prefix": "SRTC",
+        "path": "references/sprites/SRTC_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a level prop, used to generate a 3D model",
+        "SUBJECT": "a tall bronze torch stand shaped like a coiled serpent holding a bowl (flames are added by the game)",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "silhouette",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original prop's shape",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "wall_torch",
+      "role": "decoration",
+      "path": "assets/decor/wall_torch.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 0.7,
+        "max_triangles": 5000
+      },
+      "reference": {
+        "sprite_prefix": "WTRH",
+        "path": "references/sprites/WTRH_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a level prop, used to generate a 3D model",
+        "SUBJECT": "a short iron wall-mounted torch sconce (flames are added by the game)",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "silhouette",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original prop's shape",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "chandelier",
+      "role": "decoration",
+      "path": "assets/decor/chandelier.glb",
+      "status": "planned",
+      "technical": {
+        "height_m": 1.2,
+        "max_triangles": 5000
+      },
+      "reference": {
+        "sprite_prefix": "CHDL",
+        "path": "references/sprites/CHDL_sheet.png"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "concept image of a level prop, used to generate a 3D model",
+        "SUBJECT": "a hanging iron ring chandelier with candles on chains",
+        "VIEW": "the object alone, three-quarter view, whole object visible",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "silhouette",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the original prop's shape",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "BRICK",
+      "role": "built-in level texture",
+      "path": "assets/textures/BRICK.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          128,
+          128
+        ],
+        "pixels": [
+          1024,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "64-unit stone blocks, gray-brown, chipped edges, dark mortar",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "BRICKMOSS",
+      "role": "built-in level texture",
+      "path": "assets/textures/BRICKMOSS.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          128,
+          128
+        ],
+        "pixels": [
+          1024,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "the same stone blocks with green moss creeping up from the bottom",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "MARBLE",
+      "role": "built-in level texture",
+      "path": "assets/textures/MARBLE.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          128,
+          128
+        ],
+        "pixels": [
+          1024,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "green-gray veined marble panels with thin gold trim borders",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "METAL",
+      "role": "built-in level texture",
+      "path": "assets/textures/METAL.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          128
+        ],
+        "pixels": [
+          512,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "dark riveted iron plates with rust in the seams",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "WOOD",
+      "role": "built-in level texture",
+      "path": "assets/textures/WOOD.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          128
+        ],
+        "pixels": [
+          512,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "a heavy wooden door: vertical oak planks with two iron bands and rivets",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "DOORGREEN",
+      "role": "built-in level texture",
+      "path": "assets/textures/DOORGREEN.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          128
+        ],
+        "pixels": [
+          512,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "the same wooden door with a round gold-framed glowing green gem in the center",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "SW1OFF",
+      "role": "built-in level texture",
+      "path": "assets/textures/SW1OFF.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          128
+        ],
+        "pixels": [
+          512,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "an iron wall panel with a lever pulled down and a red gem lit",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "SW1ON",
+      "role": "built-in level texture",
+      "path": "assets/textures/SW1ON.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          128
+        ],
+        "pixels": [
+          512,
+          1024
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "the same panel with the lever pushed up and a green gem lit",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "FLOOR_STONE",
+      "role": "built-in level texture",
+      "path": "assets/textures/FLOOR_STONE.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "irregular worn flagstones with dark gaps",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "FLOOR_TILE",
+      "role": "built-in level texture",
+      "path": "assets/textures/FLOOR_TILE.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "large dark-and-tan checkered marble floor tiles",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "CEIL_WOOD",
+      "role": "built-in level texture",
+      "path": "assets/textures/CEIL_WOOD.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "dark ceiling wood planks",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "GRASS",
+      "role": "built-in level texture",
+      "path": "assets/textures/GRASS.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "patchy dark grass and earth",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "FLTLAVA1",
+      "role": "built-in level texture",
+      "path": "assets/textures/FLTLAVA1.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "molten lava with dark cooling crust (glow is added by the game)",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "FLTWAWA1",
+      "role": "built-in level texture",
+      "path": "assets/textures/FLTWAWA1.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "dark murky water surface",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "METALFLOOR",
+      "role": "built-in level texture",
+      "path": "assets/textures/METALFLOOR.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          64,
+          64
+        ],
+        "pixels": [
+          512,
+          512
+        ],
+        "tileable": true,
+        "maps": [
+          "albedo",
+          "normal (optional)",
+          "roughness (optional)"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "seamless tileable PBR texture for a game wall/floor",
+        "SUBJECT": "a riveted iron floor plate",
+        "VIEW": "flat orthographic texture, straight-on, fills the whole frame",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "SKYKEEP",
+      "role": "built-in level sky",
+      "path": "assets/textures/SKYKEEP.png",
+      "status": "planned",
+      "technical": {
+        "world_size_units": [
+          0,
+          0
+        ],
+        "pixels": [
+          4096,
+          2048
+        ],
+        "tileable": false,
+        "maps": [
+          "albedo"
+        ]
+      },
+      "reference": {
+        "path": "the built-in procedural texture (see screenshots)"
+      },
+      "prompt": {
+        "ROLE/PURPOSE": "sky panorama",
+        "SUBJECT": "an equirectangular 2:1 night-sky panorama: deep purple dusk, low red glow at the horizon, distant clouds",
+        "VIEW": "equirectangular panorama",
+        "ART DIRECTION": "realistic high-fidelity reinterpretation of the 1994 original design; same silhouette, proportions and color identity; physically based materials (weathered stone, aged bronze and gold, cloth, leathery hide, dented plate); worn edges",
+        "GAME-SCALE READ": "large shapes read from 5 m",
+        "TECHNICAL OUTPUT": "1024x1024 or larger, plain neutral mid-gray (#808080) background, flat even studio light, no cast shadows, no rim light, no fog",
+        "LOCKS": "keep the built-in texture's layout so it lines up",
+        "EXCLUDE": "text, labels, logo, watermark, frame, scenery, ground, multiple characters, cropped limbs, cartoon or anime style, sci-fi elements"
+      },
+      "visual_locks": [
+        "silhouette",
+        "proportions",
+        "palette",
+        "signature details"
+      ],
+      "source": {
+        "kind": "generated",
+        "url_or_tool": "",
+        "creator": "",
+        "created_at": "",
+        "license": "",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      }
+    }
+  ]
+}
