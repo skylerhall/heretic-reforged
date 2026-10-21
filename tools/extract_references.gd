@@ -3,7 +3,7 @@ extends SceneTree
 ## AI image-to-image (keeps the original silhouettes and colors) and when
 ## modeling. The output is for your own use; don't redistribute it.
 ##
-## godot --headless --path heretic-remake -s res://tools/extract_references.gd -- \
+## godot --headless --path . -s res://tools/extract_references.gd -- \
 ##     --wad=/path/to/HERETIC.WAD --out=/path/to/references
 
 const SCALE := 4   # sprites are tiny; upscale (nearest) so AI tools get usable input

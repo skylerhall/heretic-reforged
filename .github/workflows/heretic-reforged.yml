@@ -2,9 +2,6 @@ name: Heretic Reforged
 
 on:
   push:
-    paths:
-      - "heretic-remake/**"
-      - ".github/workflows/heretic-reforged.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +9,7 @@ permissions:
 
 env:
   GODOT_VERSION: 4.4.1
-  PROJECT: heretic-remake
+  PROJECT: "."
 
 jobs:
   build:

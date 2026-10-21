@@ -42,10 +42,10 @@ You need [Godot 4.4.1](https://godotengine.org/download/archive/4.4.1-stable/)
 (the standard build, not .NET) and its export templates.
 
 ```bash
-godot --path heretic-remake                          # play
-godot --headless --path heretic-remake --export-release "Web" build/web/index.html
-godot --headless --path heretic-remake --export-release "Windows" build/windows/HereticReforged.exe
-godot --headless --path heretic-remake --export-release "macOS" build/macos/HereticReforged.zip
+godot --path .                                      # play
+godot --headless --path . --export-release "Web" build/web/index.html
+godot --headless --path . --export-release "Windows" build/windows/HereticReforged.exe
+godot --headless --path . --export-release "macOS" build/macos/HereticReforged.zip
 ```
 
 | Build | Notes |
@@ -55,7 +55,7 @@ godot --headless --path heretic-remake --export-release "macOS" build/macos/Here
 | **macOS** | A universal `.app`, ad-hoc signed. The first time, right-click → Open (or run `xattr -cr "Heretic Reforged.app"`), because it isn't notarized. |
 
 **GitHub Actions** (`.github/workflows/heretic-reforged.yml`):
-- **On each push that touches `heretic-remake/`:** runs the tests and attaches
+- **On each push:** runs the tests and attaches
   the three builds to the run as downloadable artifacts.
 - **Web deployment:** on the `main` branch, the web build is also deployed to
   GitHub Pages, once Pages is enabled with source "GitHub Actions". On a private
@@ -65,10 +65,10 @@ godot --headless --path heretic-remake --export-release "macOS" build/macos/Here
 ## Tests
 
 ```bash
-godot --headless --path heretic-remake res://tests/smoke_test.tscn           # level, doors, lift, weapons, AI, exit
-godot --headless --path heretic-remake -s res://tests/triangulation_test.gd  # built-in level geometry
-godot --headless --path heretic-remake -s res://tests/wad_map_test.gd -- --wad=freedoom1.wad
-godot --headless --path heretic-remake res://tests/asset_override_test.tscn -- --mods=<dir with monsters/golem.glb>
+godot --headless --path . res://tests/smoke_test.tscn           # level, doors, lift, weapons, AI, exit
+godot --headless --path . -s res://tests/triangulation_test.gd  # built-in level geometry
+godot --headless --path . -s res://tests/wad_map_test.gd -- --wad=freedoom1.wad
+godot --headless --path . res://tests/asset_override_test.tscn -- --mods=<dir with monsters/golem.glb>
 ```
 
 `wad_map_test` works with any Doom-format WAD. CI uses

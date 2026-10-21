@@ -63,7 +63,7 @@ originals. From the repository folder:
 
 ```bash
 # macOS: GODOT=/Applications/Godot.app/Contents/MacOS/Godot
-"$GODOT" --headless --path heretic-remake -s res://tools/extract_references.gd -- \
+"$GODOT" --headless --path . -s res://tools/extract_references.gd -- \
     --wad="$HOME/Games/HERETIC.WAD" --out="$HOME/heretic-references"
 ```
 
@@ -149,12 +149,12 @@ Corvus):
 5. Run the prepare script. It scales, grounds, decimates and merges the clips:
 
    ```bash
-   blender -b --python heretic-remake/art/tools/blender_prepare.py -- \
+   blender -b --python art/tools/blender_prepare.py -- \
        --in disciple_skin.fbx --height 1.85 --max-tris 25000 \
        --anim idle=Idle.fbx --anim walk=Walking.fbx \
        --anim attack=Standing_Melee_Attack_Horizontal.fbx --anim pain=Hit_Reaction.fbx \
        --anim death=Dying.fbx \
-       --out heretic-remake/assets/monsters/disciple.glb
+       --out assets/monsters/disciple.glb
    ```
 
    It prints the final height, triangle count and which clips it found. Use
@@ -165,16 +165,16 @@ fits them by length or height (see the manifest).
 
 ## 5. See it in the game
 
-- **In the project:** files in `heretic-remake/assets/<kind>/` load automatically.
+- **In the project:** files in `assets/<kind>/` load automatically.
   Run the game from Godot, or with
-  `"$GODOT" --path heretic-remake -- --autostart --warp=960,384,0`
+  `"$GODOT" --path . -- --autostart --warp=960,384,0`
   (that drops you in the great hall).
 - **Without rebuilding:** put the same folders in `mods/` next to the
   exported game, or pass `--mods=/path/to/folder`.
 - **Fine-tuning:** a `disciple.json` next to `disciple.glb` adjusts the fit:
   `{"height": 1.9, "yaw": 0, "anims": {"attack": "Standing_Melee_Attack_Horizontal"}}`.
 - **Automated check:**
-  `"$GODOT" --headless --path heretic-remake res://tests/asset_override_test.tscn -- --mods=<folder with monsters/golem.glb>`
+  `"$GODOT" --headless --path . res://tests/asset_override_test.tscn -- --mods=<folder with monsters/golem.glb>`
   (the test reuses any model you give it as the golem)
 
 Check the asset as the brief asks:
